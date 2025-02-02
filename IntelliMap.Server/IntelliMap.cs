@@ -108,7 +108,7 @@ namespace IntelliMap.Server
                 "6. Ensure that your response follows the JSON format. so I can easily parse it:\r\n" +
                 "A json object named 'data' contains two list and an attributes, one list named 'actions' contains the 3 most recommended actions, each one is a string, and the more recommened an action is, the lower index it is at." +
                 "The other list named 'preRes' contains the 3 most likely predicted results(outcomes), the more likely an outcome is, the lower index it is at. " +
-                "Each predicted result is a object that has two attributes: \"des\" for description of the outcome and \"prob\" for probability of the outcome" +
+                "Each predicted result is a object that has two attributes: \"des\" for description of the outcome and \"prob\" for probability of the outcome which is a number between 0 to 100" +
                 "The last attribute in 'data' is 'mentalProfile' which is a string that describes the core mental features of user.\r\n";
 
                 question += mapInformation.questionDesc;
@@ -125,7 +125,7 @@ namespace IntelliMap.Server
                 "6. Ensure that your response follows the standardized JSON format below. No need to include ```json expression, so I can parse them:\r\n" +
                 "A object named \"data\" contains two list and an attributes, one list named \"actions\" contains the 3 most recommended actions, the more recommened an action is, the lower index it is at." +
                 "The other list named \"preRes\" contains the 3 most likely predicted results(outcomes), the more likely an outcome is, the lower index it is at. " +
-                "Each predicted result is a object that has two attributes: \"des\" for description of the outcome and \"prob\" for probability of the outcome" +
+                "Each predicted result is a object that has two attributes: \"des\" for description of the outcome and \"prob\" for probability of the outcome which is a number between 0 to 100" +
                 "The last attribute in \"data\" is \"mentalProfile\" which is a string that describes the core mental features of user.\r\n";
 
                 question += mapInformation.questionDesc;

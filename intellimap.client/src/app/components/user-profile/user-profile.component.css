@@ -1,0 +1,28 @@
+.conversation-container {
+    text-align: center;
+    margin: 0 auto;
+    max-width: 600px;
+    padding: 20px;
+    padding-top: 200px;
+
+  }
+  
+  .avatar img {
+    width: 80px;
+    margin-bottom: 20px;
+  }
+  
+  .question p {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .answer-options button {
+    margin: 10px 5px;
+  }
+  
+  mat-progress-spinner {
+    margin-top: 20px;
+  }
+  

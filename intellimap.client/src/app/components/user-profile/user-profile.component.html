@@ -1,0 +1,22 @@
+<div class="conversation-container">
+    <!-- Small character avatar -->
+    <div class="avatar">
+      <img src="../../../assets/logo.png" alt="Character" />
+    </div>
+  
+    <!-- Display current question -->
+    <div class="question">
+      <p>{{ currentQuestion.text }}</p>
+    </div>
+  
+    <!-- Display answer options -->
+    <div class="answer-options">
+      <button *ngFor="let option of currentQuestion.options" mat-raised-button (click)="selectAnswer(option)">
+        {{ option }}
+      </button>
+    </div>
+  
+    <!-- Loading spinner during submission -->
+    <mat-progress-spinner *ngIf="isSubmitting" mode="indeterminate"></mat-progress-spinner>
+  </div>
+  
