@@ -1,31 +1,22 @@
-<mat-horizontal-stepper linear>
-    <mat-step *ngFor="let question of questions; let i = index">
-      <ng-template matStepLabel></ng-template>
+<div class="conversation-container">
+    <!-- Small character avatar -->
+    <div class="avatar">
+      <img src="../../../assets/logo.png" alt="Character" />
+    </div>
   
-      <div class="question-container">
-        <h3 class="question-text">{{ question.text }}</h3>
-        <mat-radio-group [(ngModel)]="question.answer" [ngModelOptions]="{ standalone: true }">
-          <mat-radio-button *ngFor="let option of question.options" [value]="option">
-            {{ option }}
-          </mat-radio-button>
-        </mat-radio-group>
-      </div>
+    <!-- Display current question -->
+    <div class="question">
+      <p>{{ currentQuestion.text }}</p>
+    </div>
   
-      <div class="step-buttons">
-        <button mat-button matStepperPrevious *ngIf="i > 0">上一题</button>
-        <button mat-button matStepperNext *ngIf="i < questions.length - 1">下一题</button>
-      </div>
-    </mat-step>
-  </mat-horizontal-stepper>
+    <!-- Display answer options -->
+    <div class="answer-options">
+      <button *ngFor="let option of currentQuestion.options" mat-raised-button (click)="selectAnswer(option)">
+        {{ option }}
+      </button>
+    </div>
   
-  <div class="submit-section">
-    <button
-      mat-raised-button
-      color="primary"
-      [disabled]="isSubmitting"
-      (click)="submitQuestions()"
-    >
-      {{ isSubmitting ? '正在提交...' : '提交问卷' }}
-    </button>
+    <!-- Loading spinner during submission -->
+    <mat-progress-spinner *ngIf="isSubmitting" mode="indeterminate"></mat-progress-spinner>
   </div>
   
