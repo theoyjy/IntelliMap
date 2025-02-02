@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using System.Security.AccessControl;
+using static IntelliMap.Server.AiService;
 
 namespace IntelliMap.Server.Controllers
 {
@@ -10,15 +11,17 @@ namespace IntelliMap.Server.Controllers
     {
         private readonly ILogger<IntelliMapController> _logger;
         private readonly IMemoryCache _cache;
+        private AiService _aiService;
 
-        public IntelliMapController(ILogger<IntelliMapController> logger, IMemoryCache cache)
+        public IntelliMapController(ILogger<IntelliMapController> logger, IMemoryCache cache, AiService aiService)
         {
             _logger = logger;
             _cache = cache;
+            _aiService = aiService;
         }
 
         [HttpPost]
-        public IActionResult ProcessFirstProfile([FromBody] Profile profile)
+        public async Task<IActionResult> ProcessFirstProfile([FromBody] FirstProfile profile)
         {
             if (profile == null)
             {
@@ -42,24 +45,10 @@ namespace IntelliMap.Server.Controllers
             _logger.LogInformation("firstProfile request processed successfully");
 
             _cache.Set(profile.UserId, profile, TimeSpan.FromMinutes(10));
-
-            var response = new
-            {
-                code = 0,  // 成功
-                data = new
-                {
-                    defAct = "Surrender",
-                    preRes = new
-                    {
-                        des = "Prison",
-                        prob = 1.00
-                    }
-                },
-                msg = "Request processed successfully"
-            };
-
-            return Ok(response);
+            AskType ask = AskType.MentalAnswer;
+            var aiResponse = await _aiService.AskAI(profile.UserId, profile.EventDesc, profile.Answer, ask);
+            return Ok(aiResponse);
         }
-
     }
 }
+
