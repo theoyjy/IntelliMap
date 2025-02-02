@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\IntelliMap.Server.props" />
+</Project>
