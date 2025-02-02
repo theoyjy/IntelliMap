@@ -1,6 +1,6 @@
 {
 "SpaProxyServer": {
-"ServerUrl": "https://localhost:4200",
+"ServerUrl": "http://localhost:4200",
 "RedirectUrl": "",
 "LaunchCommand": "npm start",
 "WorkingDirectory": "D:\\Project\\IntelliMap\\IntelliMap.Server\\..\\intellimap.client",

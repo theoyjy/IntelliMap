@@ -3,28 +3,28 @@
   "WorkspaceRootPath": "D:\\Project\\IntelliMap\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\IntelliMap\\intellimap.client\\src\\app\\app.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:intellimap.client\\src\\app\\app.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+      "AbsoluteMoniker": "D:0:0:{E04F4145-866A-47A0-90EA-4DF1919B1623}|IntelliMap.Server\\IntelliMap.Server.csproj|d:\\project\\intellimap\\intellimap.server\\intellimap.server.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{E04F4145-866A-47A0-90EA-4DF1919B1623}|IntelliMap.Server\\IntelliMap.Server.csproj|solutionrelative:intellimap.server\\intellimap.server.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\IntelliMap\\IntelliMap.Server\\Controllers\\IntelliMapController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:IntelliMap.Server\\Controllers\\IntelliMapController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E04F4145-866A-47A0-90EA-4DF1919B1623}|IntelliMap.Server\\IntelliMap.Server.csproj|d:\\project\\intellimap\\intellimap.server\\controllers\\intellimapcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E04F4145-866A-47A0-90EA-4DF1919B1623}|IntelliMap.Server\\IntelliMap.Server.csproj|solutionrelative:intellimap.server\\controllers\\intellimapcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\IntelliMap\\intellimap.client\\src\\app\\app.component.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:intellimap.client\\src\\app\\app.component.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{E04F4145-866A-47A0-90EA-4DF1919B1623}|IntelliMap.Server\\IntelliMap.Server.csproj|d:\\project\\intellimap\\intellimap.server\\intellimap.server.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{E04F4145-866A-47A0-90EA-4DF1919B1623}|IntelliMap.Server\\IntelliMap.Server.csproj|solutionrelative:intellimap.server\\intellimap.server.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\IntelliMap\\intellimap.client\\src\\main.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:intellimap.client\\src\\main.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+      "AbsoluteMoniker": "D:0:0:{E04F4145-866A-47A0-90EA-4DF1919B1623}|IntelliMap.Server\\IntelliMap.Server.csproj|d:\\project\\intellimap\\intellimap.server\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{E04F4145-866A-47A0-90EA-4DF1919B1623}|IntelliMap.Server\\IntelliMap.Server.csproj|solutionrelative:intellimap.server\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\IntelliMap\\IntelliMap.Server\\IntelliMap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:IntelliMap.Server\\IntelliMap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E04F4145-866A-47A0-90EA-4DF1919B1623}|IntelliMap.Server\\IntelliMap.Server.csproj|d:\\project\\intellimap\\intellimap.server\\intellimap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E04F4145-866A-47A0-90EA-4DF1919B1623}|IntelliMap.Server\\IntelliMap.Server.csproj|solutionrelative:intellimap.server\\intellimap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\IntelliMap\\IntelliMap.Server\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:IntelliMap.Server\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{E04F4145-866A-47A0-90EA-4DF1919B1623}|IntelliMap.Server\\IntelliMap.Server.csproj|d:\\project\\intellimap\\intellimap.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E04F4145-866A-47A0-90EA-4DF1919B1623}|IntelliMap.Server\\IntelliMap.Server.csproj|solutionrelative:intellimap.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -51,51 +51,54 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "app.component.ts",
-              "DocumentMoniker": "D:\\Project\\IntelliMap\\intellimap.client\\src\\app\\app.component.ts",
-              "RelativeDocumentMoniker": "intellimap.client\\src\\app\\app.component.ts",
-              "ToolTip": "D:\\Project\\IntelliMap\\intellimap.client\\src\\app\\app.component.ts",
-              "RelativeToolTip": "intellimap.client\\src\\app\\app.component.ts",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-02-02T15:02:03.216Z",
+              "Title": "IntelliMap.Server",
+              "DocumentMoniker": "D:\\Project\\IntelliMap\\IntelliMap.Server\\IntelliMap.Server.csproj",
+              "RelativeDocumentMoniker": "IntelliMap.Server\\IntelliMap.Server.csproj",
+              "ToolTip": "D:\\Project\\IntelliMap\\IntelliMap.Server\\IntelliMap.Server.csproj",
+              "RelativeToolTip": "IntelliMap.Server\\IntelliMap.Server.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-02-02T17:17:51.478Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "app.component.html",
-              "DocumentMoniker": "D:\\Project\\IntelliMap\\intellimap.client\\src\\app\\app.component.html",
-              "RelativeDocumentMoniker": "intellimap.client\\src\\app\\app.component.html",
-              "ToolTip": "D:\\Project\\IntelliMap\\intellimap.client\\src\\app\\app.component.html",
-              "RelativeToolTip": "intellimap.client\\src\\app\\app.component.html",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAbAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2025-02-02T15:01:24.64Z"
+              "Title": "IntelliMap.Server.http",
+              "DocumentMoniker": "D:\\Project\\IntelliMap\\IntelliMap.Server\\IntelliMap.Server.http",
+              "RelativeDocumentMoniker": "IntelliMap.Server\\IntelliMap.Server.http",
+              "ToolTip": "D:\\Project\\IntelliMap\\IntelliMap.Server\\IntelliMap.Server.http",
+              "RelativeToolTip": "IntelliMap.Server\\IntelliMap.Server.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-02-02T17:14:38.511Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "main.ts",
-              "DocumentMoniker": "D:\\Project\\IntelliMap\\intellimap.client\\src\\main.ts",
-              "RelativeDocumentMoniker": "intellimap.client\\src\\main.ts",
-              "ToolTip": "D:\\Project\\IntelliMap\\intellimap.client\\src\\main.ts",
-              "RelativeToolTip": "intellimap.client\\src\\main.ts",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-02-02T15:01:00.229Z"
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Project\\IntelliMap\\IntelliMap.Server\\appsettings.json",
+              "RelativeDocumentMoniker": "IntelliMap.Server\\appsettings.json",
+              "ToolTip": "D:\\Project\\IntelliMap\\IntelliMap.Server\\appsettings.json",
+              "RelativeToolTip": "IntelliMap.Server\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-02-02T17:14:23.394Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "IntelliMap.cs",
-              "DocumentMoniker": "D:\\Project\\IntelliMap\\IntelliMap.Server\\IntelliMap.cs",
-              "RelativeDocumentMoniker": "IntelliMap.Server\\IntelliMap.cs",
-              "ToolTip": "D:\\Project\\IntelliMap\\IntelliMap.Server\\IntelliMap.cs",
-              "RelativeToolTip": "IntelliMap.Server\\IntelliMap.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAgAAAA",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Project\\IntelliMap\\IntelliMap.Server\\Program.cs",
+              "RelativeDocumentMoniker": "IntelliMap.Server\\Program.cs",
+              "ToolTip": "D:\\Project\\IntelliMap\\IntelliMap.Server\\Program.cs",
+              "RelativeToolTip": "IntelliMap.Server\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-02T13:55:46.222Z"
+              "WhenOpened": "2025-02-02T17:04:36.846Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -105,22 +108,23 @@
               "RelativeDocumentMoniker": "IntelliMap.Server\\Controllers\\IntelliMapController.cs",
               "ToolTip": "D:\\Project\\IntelliMap\\IntelliMap.Server\\Controllers\\IntelliMapController.cs",
               "RelativeToolTip": "IntelliMap.Server\\Controllers\\IntelliMapController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAACoAAAAAAAAAAAAiwC0AAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-01T20:52:11.641Z",
+              "WhenOpened": "2025-02-02T17:04:39.39Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\Project\\IntelliMap\\IntelliMap.Server\\appsettings.json",
-              "RelativeDocumentMoniker": "IntelliMap.Server\\appsettings.json",
-              "ToolTip": "D:\\Project\\IntelliMap\\IntelliMap.Server\\appsettings.json",
-              "RelativeToolTip": "IntelliMap.Server\\appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-02-01T20:52:06.834Z"
+              "DocumentIndex": 4,
+              "Title": "IntelliMap.cs",
+              "DocumentMoniker": "D:\\Project\\IntelliMap\\IntelliMap.Server\\IntelliMap.cs",
+              "RelativeDocumentMoniker": "IntelliMap.Server\\IntelliMap.cs",
+              "ToolTip": "D:\\Project\\IntelliMap\\IntelliMap.Server\\IntelliMap.cs",
+              "RelativeToolTip": "IntelliMap.Server\\IntelliMap.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAswAcAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-02T17:04:34.336Z",
+              "EditorCaption": ""
             }
           ]
         }
