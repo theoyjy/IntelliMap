@@ -20,6 +20,14 @@ namespace IntelliMap.Server
         public required string[] Answer { get; set; }
     };
 
+    public class MapUpdate
+    {
+        public required string UserId { get; set; }
+        public required string newDesc { get; set; }
+        public required string[] actionsTaken { get; set; }
+    };
+
+
     public class MapInformation
     {
         public string userId { get; set; }
@@ -102,13 +110,13 @@ namespace IntelliMap.Server
                 question = "You are an intelligent decision-making assistant. Your task is to:\r\n" +
                 "1. Analyze the user's profile based on the provided responses to 10 questions.\r\n" +
                 "2. Understand and analyze the user's current problem, using user's description and user profile.\r\n" +
-                "3. Generate 3 recommended actions that the user can take to address the issue.\r\n" +
+                "3. Generate 3 recommended actions that the user can take to address the issue, each action should be limited to 3 words.\r\n" +
                 "4. Assume that the user has taken the most optimal action and predict the 3 most likely outcomes.\r\n" +
                 "5. Provide a probability distribution for each predicted outcome (totaling 100%).\r\n" +
                 "6. Ensure that your response follows the JSON format. so I can easily parse it:\r\n" +
                 "A json object named 'data' contains two list and an attributes, one list named 'actions' contains the 3 most recommended actions, each one is a string, and the more recommened an action is, the lower index it is at." +
                 "The other list named 'preRes' contains the 3 most likely predicted results(outcomes), the more likely an outcome is, the lower index it is at. " +
-                "Each predicted result is a object that has two attributes: \"des\" for description of the outcome and \"prob\" for probability of the outcome which is a number between 0 to 100" +
+                "Each predicted result is a object that has two attributes: \"des\" for description of the outcome (limited to 30 words) and \"prob\" for probability of the outcome which is a number between 0 to 100" +
                 "The last attribute in 'data' is 'mentalProfile' which is a string that describes the core mental features of user.\r\n";
 
                 question += mapInformation.questionDesc;
@@ -119,13 +127,13 @@ namespace IntelliMap.Server
                 question = "You are an intelligent decision-making assistant. Your task is to:\r\n" +
                 "1. Update the user's mental profile based on the profile passed to you and the questions the user asked and actions has taken\r\n" +
                 "2. Understand and analyze the user's current problem, using the user's description and user profile.\r\n" +
-                "3. Generate 3 recommended actions that the user can take to address the issue.\r\n" +
+                "3. Generate 3 recommended actions that the user can take to address the issue, each action should be limited to 3 words.\r\n" +
                 "4. Assume that the user has taken the most optimal action and predict the 3 most likely outcomes.\r\n" +
                 "5. Provide a probability distribution for each predicted outcome (totaling 100%).\r\n" +
                 "6. Ensure that your response follows the standardized JSON format below. No need to include ```json expression, so I can parse them:\r\n" +
                 "A object named \"data\" contains two list and an attributes, one list named \"actions\" contains the 3 most recommended actions, the more recommened an action is, the lower index it is at." +
                 "The other list named \"preRes\" contains the 3 most likely predicted results(outcomes), the more likely an outcome is, the lower index it is at. " +
-                "Each predicted result is a object that has two attributes: \"des\" for description of the outcome and \"prob\" for probability of the outcome which is a number between 0 to 100" +
+                "Each predicted result is a object that has two attributes: \"des\" for description of the outcome (limited to 30 words) and \"prob\" for probability of the outcome which is a number between 0 to 100" +
                 "The last attribute in \"data\" is \"mentalProfile\" which is a string that describes the core mental features of user.\r\n";
 
                 question += mapInformation.questionDesc;
