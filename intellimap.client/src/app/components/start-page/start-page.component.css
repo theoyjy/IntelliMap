@@ -1,0 +1,58 @@
+/* 页面容器样式 */
+.start-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f5f5f5; /* 浅灰色背景 */
+    text-align: center;
+    padding: 0 16px; /* 响应式内边距 */
+  }
+  
+  /* Logo 样式 */
+  .start-logo {
+    width: 80px; /* 设置 Logo 宽度 */
+    height: 80px; /* 设置 Logo 高度 */
+    margin-bottom: 16px; /* 与标题之间的间距 */
+  }
+  
+  /* 标题样式 */
+  .start-page-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333333; /* 深灰色字体 */
+    margin-bottom: 24px;
+  }
+  
+  /* 输入框和按钮容器样式 */
+  .input-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px; /* 限制最大宽度 */
+    gap: 8px; /* 输入框和按钮之间的间距 */
+  }
+  
+  /* 输入框样式 */
+  .input-container {
+    flex: 1; /* 输入框占据剩余空间 */
+  }
+  
+  .input-container input {
+    height: 50px; /* 方形设计 */
+    border-radius: 0; /* 移除圆角 */
+  }
+  
+  /* 按钮样式 */
+  .start-button {
+    width: 120px; /* 固定按钮宽度 */
+    height: 50px; /* 方形设计 */
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 0; /* 移除圆角 */
+    text-transform: none; /* 禁用全部大写 */
+    white-space: nowrap; /* 防止按钮内容换行 */
+  }
+  

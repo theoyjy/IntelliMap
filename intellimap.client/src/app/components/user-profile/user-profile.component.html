@@ -1,0 +1,31 @@
+<mat-horizontal-stepper linear>
+    <mat-step *ngFor="let question of questions; let i = index">
+      <ng-template matStepLabel></ng-template>
+  
+      <div class="question-container">
+        <h3 class="question-text">{{ question.text }}</h3>
+        <mat-radio-group [(ngModel)]="question.answer" [ngModelOptions]="{ standalone: true }">
+          <mat-radio-button *ngFor="let option of question.options" [value]="option">
+            {{ option }}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+  
+      <div class="step-buttons">
+        <button mat-button matStepperPrevious *ngIf="i > 0">上一题</button>
+        <button mat-button matStepperNext *ngIf="i < questions.length - 1">下一题</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+  
+  <div class="submit-section">
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="isSubmitting"
+      (click)="submitQuestions()"
+    >
+      {{ isSubmitting ? '正在提交...' : '提交问卷' }}
+    </button>
+  </div>
+  

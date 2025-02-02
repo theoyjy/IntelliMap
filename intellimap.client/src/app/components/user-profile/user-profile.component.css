@@ -1,0 +1,19 @@
+.mat-horizontal-stepper-header {
+    display: none;
+  }
+  
+  .question-container {
+    margin-bottom: 20px;
+  }
+  
+  .step-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .submit-section {
+    margin-top: 30px;
+    text-align: center;
+  }
+  

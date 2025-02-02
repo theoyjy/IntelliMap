@@ -1,0 +1,23 @@
+<div class="start-page-container">
+    <!-- Logo -->
+    <img src="assets/logo.png" alt="Logo" class="start-logo" />
+  
+    <!-- 标题 -->
+    <h1 class="start-page-title">Welcome to IntelliMap Decision</h1>
+  
+    <!-- 输入框和按钮 -->
+    <div class="input-button-container">
+      <mat-form-field appearance="outline" class="input-container">
+        <mat-label>What is your concern?</mat-label>
+        <input
+          matInput
+          [(ngModel)]="eventDesc"
+          placeholder="Describe your concern"
+        />
+      </mat-form-field>
+      <button mat-raised-button color="primary" class="start-button" (click)="navigateToQuestionnaire()">
+        Start
+      </button>
+    </div>
+  </div>
+  
