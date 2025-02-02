@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("IntelliMap.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b98288622f60818f6c25534375dc3d8bf87101d6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f32818060f8e7e4deb4ccf75884796c63f5ffb0a")]
 [assembly: System.Reflection.AssemblyProductAttribute("IntelliMap.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("IntelliMap.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

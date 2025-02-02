@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as d3 from 'd3';
+import { CommonModule } from '@angular/common';
 
 export interface Node {
   id: number;
@@ -18,22 +19,33 @@ export interface Link {
   templateUrl: './behavior-path.component.html',
   styleUrls: ['./behavior-path.component.css'],
   standalone: true,
+  imports: [CommonModule],
 })
 export class BehaviorPathComponent implements OnInit {
   private svg: any;
   private width = 800;
   private height = 600;
-  private nodes: Node[] = [
-    { id: 1, name: '默认行为', x: 100, y: 300 },
-    { id: 2, name: '结果', x: 500, y: 300 },
-  ];
-  private links: Link[] = [
-    { source: 1, target: 2 }, // 默认行为指向结果
-  ];
+  private nodes: Node[] = [];
+  private links: Link[] = [];
+  public aiResult: any;
+
+  constructor() {}
 
   ngOnInit(): void {
     this.createSvg();
-    this.updateGraph();
+
+    // 从 LocalStorage 获取数据
+    const storedResult = localStorage.getItem('aiResult');
+    if (storedResult) {
+      this.aiResult = JSON.parse(storedResult);
+
+      // 清除 LocalStorage 数据，避免重复使用
+      localStorage.removeItem('aiResult');
+
+      this.processAiResult(this.aiResult);
+    } else {
+      console.error('AI 结果未找到，请确保问卷页面已正确存储数据！');
+    }
   }
 
   private createSvg(): void {
@@ -42,29 +54,68 @@ export class BehaviorPathComponent implements OnInit {
       .append('svg')
       .attr('width', this.width)
       .attr('height', this.height)
-      .style('border', '1px solid #ccc');
+      .style('background-color', '#f9f9f9')
+      .style('border', '1px solid #ddd');
+  }
 
-    // 监听节点点击事件
-    this.svg.on('click', (event: MouseEvent) => this.addBehavior(event));
+  private processAiResult(aiResult: any): void {
+    // 如果后端返回的不是数组，而是单个字符串
+    const actionList = aiResult.defAct ? [aiResult.defAct] : []; // 转换为数组
+    const preRes = aiResult.preRes || { des: '未知结果', prob: 0 };
+
+    // 构造行为节点
+    this.nodes = actionList.map((action: string, index: number) => ({
+      id: index + 1,
+      name: action,
+      x: 150 + index * 300,
+      y: 300,
+    }));
+
+    // 添加结果节点
+    this.nodes.push({
+      id: this.nodes.length + 1,
+      name: `${preRes.des} (${(preRes.prob * 100).toFixed(2)}%)`,
+      x: 150 + this.nodes.length * 300,
+      y: 300,
+    });
+
+    // 构造连线
+    this.links = this.nodes.slice(0, -1).map((node, index) => ({
+      source: node.id,
+      target: this.nodes[index + 1].id,
+    }));
+
+    this.adjustCanvasSize();
+    this.updateGraph();
+  }
+
+  private adjustCanvasSize(): void {
+    this.width = Math.max(800, this.nodes.length * 300);
+    this.svg.attr('width', this.width);
   }
 
   private updateGraph(): void {
-    // 清空旧图表
+    // 清空画布
     this.svg.selectAll('*').remove();
-
-    // 绘制连线
+  
+    // 绘制连线（弧线）
     this.svg
-      .selectAll('line')
+      .selectAll('path')
       .data(this.links)
       .enter()
-      .append('line')
-      .attr('x1', (d: Link) => this.getNodeById(d.source).x)
-      .attr('y1', (d: Link) => this.getNodeById(d.source).y)
-      .attr('x2', (d: Link) => this.getNodeById(d.target).x)
-      .attr('y2', (d: Link) => this.getNodeById(d.target).y)
-      .attr('stroke', '#ccc')
+      .append('path')
+      .attr('d', (d: Link) => {
+        const source = this.getNodeById(d.source);
+        const target = this.getNodeById(d.target);
+        const dx = target.x - source.x;
+        const dy = target.y - source.y;
+        const dr = Math.sqrt(dx * dx + dy * dy);
+        return `M${source.x},${source.y}A${dr},${dr} 0 0,1 ${target.x},${target.y}`;
+      })
+      .attr('fill', 'none')
+      .attr('stroke', '#999')
       .attr('stroke-width', 2);
-
+  
     // 绘制节点
     const nodeGroup = this.svg
       .selectAll('g')
@@ -72,12 +123,24 @@ export class BehaviorPathComponent implements OnInit {
       .enter()
       .append('g')
       .attr('transform', (d: Node) => `translate(${d.x}, ${d.y})`);
-
+  
     nodeGroup
       .append('circle')
-      .attr('r', 30)
-      .attr('fill', (d: Node) => (d.id === 1 || d.id === 2 ? '#2196f3' : '#4caf50'));
-
+      .attr('r', 35)
+      .attr('fill', (d: Node) => (d.id === this.nodes.length ? '#4caf50' : '#2196f3'))
+      .attr('stroke', '#fff')
+      .attr('stroke-width', 2)
+      .on('mouseover', (event: MouseEvent) => {
+        d3.select(event.currentTarget as SVGCircleElement)
+          .attr('r', 40)
+          .attr('fill', '#ff9800');
+      })
+      .on('mouseout', (event: MouseEvent, d: Node) => {
+        d3.select(event.currentTarget as SVGCircleElement)
+          .attr('r', 35)
+          .attr('fill', d.id === this.nodes.length ? '#4caf50' : '#2196f3');
+      });
+      
     nodeGroup
       .append('text')
       .attr('text-anchor', 'middle')
@@ -86,32 +149,7 @@ export class BehaviorPathComponent implements OnInit {
       .style('font-size', '14px')
       .text((d: Node) => d.name);
   }
-
-  private addBehavior(event: MouseEvent): void {
-    const coords = d3.pointer(event);
-
-    // 获取最后一个行为节点的 ID（默认行为 -> 结果之间）
-    const lastBehaviorId = this.nodes.length - 1;
-    const newNodeId = this.nodes.length + 1;
-
-    // 插入新节点
-    const newNode: Node = {
-      id: newNodeId,
-      name: `行为 ${newNodeId - 2}`,
-      x: coords[0],
-      y: coords[1],
-    };
-    this.nodes.splice(lastBehaviorId, 0, newNode);
-
-    // 更新连线
-    this.links = this.links.filter((link) => link.source !== 1 || link.target !== 2); // 删除默认行为到结果的直接连线
-    this.links.push(
-      { source: 1, target: newNodeId }, // 默认行为 -> 新节点
-      { source: newNodeId, target: 2 } // 新节点 -> 结果
-    );
-
-    this.updateGraph();
-  }
+  
 
   private getNodeById(id: number): Node {
     return this.nodes.find((node) => node.id === id) as Node;
