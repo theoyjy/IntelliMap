@@ -3,28 +3,16 @@
   "WorkspaceRootPath": "D:\\Code\\IntelliMap\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E04F4145-866A-47A0-90EA-4DF1919B1623}|IntelliMap.Server\\IntelliMap.Server.csproj|d:\\code\\intellimap\\intellimap.server\\controllers\\intellimapcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E04F4145-866A-47A0-90EA-4DF1919B1623}|IntelliMap.Server\\IntelliMap.Server.csproj|solutionrelative:intellimap.server\\controllers\\intellimapcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{E04F4145-866A-47A0-90EA-4DF1919B1623}|IntelliMap.Server\\IntelliMap.Server.csproj|d:\\code\\intellimap\\intellimap.server\\intellimap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E04F4145-866A-47A0-90EA-4DF1919B1623}|IntelliMap.Server\\IntelliMap.Server.csproj|solutionrelative:intellimap.server\\intellimap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EE2B67FC-7A96-4E8F-9484-7A35B5AD534A}|intellimap.client\\intellimap.client.esproj|d:\\code\\intellimap\\intellimap.client\\src\\app\\app.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
-      "RelativeMoniker": "D:0:0:{EE2B67FC-7A96-4E8F-9484-7A35B5AD534A}|intellimap.client\\intellimap.client.esproj|solutionrelative:intellimap.client\\src\\app\\app.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+      "AbsoluteMoniker": "D:0:0:{E04F4145-866A-47A0-90EA-4DF1919B1623}|IntelliMap.Server\\IntelliMap.Server.csproj|d:\\code\\intellimap\\intellimap.server\\controllers\\intellimapcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E04F4145-866A-47A0-90EA-4DF1919B1623}|IntelliMap.Server\\IntelliMap.Server.csproj|solutionrelative:intellimap.server\\controllers\\intellimapcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EE2B67FC-7A96-4E8F-9484-7A35B5AD534A}|intellimap.client\\intellimap.client.esproj|d:\\code\\intellimap\\intellimap.client\\src\\app\\app.component.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EE2B67FC-7A96-4E8F-9484-7A35B5AD534A}|intellimap.client\\intellimap.client.esproj|solutionrelative:intellimap.client\\src\\app\\app.component.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE2B67FC-7A96-4E8F-9484-7A35B5AD534A}|intellimap.client\\intellimap.client.esproj|d:\\code\\intellimap\\intellimap.client\\src\\main.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
-      "RelativeMoniker": "D:0:0:{EE2B67FC-7A96-4E8F-9484-7A35B5AD534A}|intellimap.client\\intellimap.client.esproj|solutionrelative:intellimap.client\\src\\main.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E04F4145-866A-47A0-90EA-4DF1919B1623}|IntelliMap.Server\\IntelliMap.Server.csproj|d:\\code\\intellimap\\intellimap.server\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{E04F4145-866A-47A0-90EA-4DF1919B1623}|IntelliMap.Server\\IntelliMap.Server.csproj|solutionrelative:intellimap.server\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{E04F4145-866A-47A0-90EA-4DF1919B1623}|IntelliMap.Server\\IntelliMap.Server.csproj|d:\\code\\intellimap\\intellimap.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E04F4145-866A-47A0-90EA-4DF1919B1623}|IntelliMap.Server\\IntelliMap.Server.csproj|solutionrelative:intellimap.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -33,13 +21,9 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "DockedWidth": 225,
+          "SelectedChildIndex": 3,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
@@ -51,79 +35,40 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "app.component.ts",
-              "DocumentMoniker": "D:\\Code\\IntelliMap\\intellimap.client\\src\\app\\app.component.ts",
-              "RelativeDocumentMoniker": "intellimap.client\\src\\app\\app.component.ts",
-              "ToolTip": "D:\\Code\\IntelliMap\\intellimap.client\\src\\app\\app.component.ts",
-              "RelativeToolTip": "intellimap.client\\src\\app\\app.component.ts",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAwAAAAmAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-02-02T15:02:03.216Z",
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Code\\IntelliMap\\IntelliMap.Server\\Program.cs",
+              "RelativeDocumentMoniker": "IntelliMap.Server\\Program.cs",
+              "ToolTip": "D:\\Code\\IntelliMap\\IntelliMap.Server\\Program.cs",
+              "RelativeToolTip": "IntelliMap.Server\\Program.cs",
+              "ViewState": "AQIAAAIAAAAAAAAAAAAwwB4AAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-02T15:50:33.582Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "app.component.html",
-              "DocumentMoniker": "D:\\Code\\IntelliMap\\intellimap.client\\src\\app\\app.component.html",
-              "RelativeDocumentMoniker": "intellimap.client\\src\\app\\app.component.html",
-              "ToolTip": "D:\\Code\\IntelliMap\\intellimap.client\\src\\app\\app.component.html",
-              "RelativeToolTip": "intellimap.client\\src\\app\\app.component.html",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAbAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2025-02-02T15:01:24.64Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "main.ts",
-              "DocumentMoniker": "D:\\Code\\IntelliMap\\intellimap.client\\src\\main.ts",
-              "RelativeDocumentMoniker": "intellimap.client\\src\\main.ts",
-              "ToolTip": "D:\\Code\\IntelliMap\\intellimap.client\\src\\main.ts",
-              "RelativeToolTip": "intellimap.client\\src\\main.ts",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-02-02T15:01:00.229Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "IntelliMap.cs",
               "DocumentMoniker": "D:\\Code\\IntelliMap\\IntelliMap.Server\\IntelliMap.cs",
               "RelativeDocumentMoniker": "IntelliMap.Server\\IntelliMap.cs",
               "ToolTip": "D:\\Code\\IntelliMap\\IntelliMap.Server\\IntelliMap.cs",
               "RelativeToolTip": "IntelliMap.Server\\IntelliMap.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAgAAAA",
+              "ViewState": "AQIAAOYAAAAwZmZmZqYkwOsAAABMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-02T13:55:46.222Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "IntelliMapController.cs",
               "DocumentMoniker": "D:\\Code\\IntelliMap\\IntelliMap.Server\\Controllers\\IntelliMapController.cs",
               "RelativeDocumentMoniker": "IntelliMap.Server\\Controllers\\IntelliMapController.cs",
               "ToolTip": "D:\\Code\\IntelliMap\\IntelliMap.Server\\Controllers\\IntelliMapController.cs",
               "RelativeToolTip": "IntelliMap.Server\\Controllers\\IntelliMapController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAdAAAA",
+              "ViewState": "AQIAABYAAAAAzMzMzMwewDYAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-01T20:52:11.641Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\Code\\IntelliMap\\IntelliMap.Server\\appsettings.json",
-              "RelativeDocumentMoniker": "IntelliMap.Server\\appsettings.json",
-              "ToolTip": "D:\\Code\\IntelliMap\\IntelliMap.Server\\appsettings.json",
-              "RelativeToolTip": "IntelliMap.Server\\appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-02-01T20:52:06.834Z",
               "EditorCaption": ""
             }
           ]

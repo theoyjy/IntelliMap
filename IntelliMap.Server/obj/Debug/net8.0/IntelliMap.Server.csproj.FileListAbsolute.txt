@@ -33,3 +33,4 @@ D:\Code\IntelliMap\IntelliMap.Server\obj\Debug\net8.0\refint\IntelliMap.Server.d
 D:\Code\IntelliMap\IntelliMap.Server\obj\Debug\net8.0\IntelliMap.Server.pdb
 D:\Code\IntelliMap\IntelliMap.Server\obj\Debug\net8.0\IntelliMap.Server.genruntimeconfig.cache
 D:\Code\IntelliMap\IntelliMap.Server\obj\Debug\net8.0\ref\IntelliMap.Server.dll
+D:\Code\IntelliMap\IntelliMap.Server\obj\Debug\net8.0\IntelliMap.Server.sourcelink.json
