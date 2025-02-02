@@ -11,7 +11,7 @@ export class ApiService {
 
   // 定义 postData 方法
   postData(endpoint: string, body: any): Observable<any> {
-    const url = `${environment.apiUrl}/${endpoint}`; // 使用环境变量中的后端地址
-    return this.http.post<any>(url, body); // 发送 POST 请求
+    const url = `${environment.apiUrl}/${endpoint}`; 
+    return this.http.post<any>(url, body);
   }
 }

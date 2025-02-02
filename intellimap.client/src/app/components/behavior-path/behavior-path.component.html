@@ -1,1 +1,11 @@
 <div id="behaviorPathContainer"></div>
+<div *ngIf="showRecommendations" class="recommendation-container">
+    <h3>推荐行为</h3>
+    <ul>
+      <li *ngFor="let action of recommendedActions" (click)="selectBehavior(action)">
+        {{ action }}
+      </li>
+    </ul>
+    <button (click)="showRecommendations = false">取消</button>
+  </div>
+  
