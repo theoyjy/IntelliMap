@@ -77,6 +77,15 @@ namespace IntelliMap.Server.Controllers
             _cache.Set(mapUpdate.UserId, mapUpdate, TimeSpan.FromMinutes(10));
             AskType ask = AskType.ActionTaken;
             var aiResponse = await _aiService.AskAI(mapUpdate.UserId, mapUpdate.newDesc, mapUpdate.actionsTaken, ask);
+            if (aiResponse == null)
+            {
+                return BadRequest(new
+                {
+                    code = 1,
+                    data = new object(),
+                    message = "AI service is unavailable right now"
+                });
+            }
             return Ok(aiResponse);
         }
     }

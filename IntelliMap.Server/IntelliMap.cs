@@ -169,6 +169,11 @@ namespace IntelliMap.Server
         public async Task<ApiResponse> AskAI(string userId, string question, string[] list, AskType askType)
         {
             var mapInformation = GetMapInformation(userId);
+            if(askType == AskType.ActionTaken && mapInformation.questionDesc == null)
+            {
+                // cache expired
+                return null;
+            }
 
             mapInformation = UpdateMapInformationFromUser(mapInformation, question, list, askType);  
 
