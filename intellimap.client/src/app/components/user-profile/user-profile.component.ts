@@ -79,7 +79,8 @@ export class UserProfileComponent implements OnInit {
       (response: any) => {
         this.aiAnalysisResult = response;
         localStorage.setItem('aiResult', JSON.stringify(response.data));
-        this.router.navigate(['/behavior-path']);
+        this.router.navigate(['/behavior-path'],{queryParams: { userId: this.userId, eventDesc: this.eventDesc }
+        });
       },
       (error) => {
         console.error('Submission failed:', error);
