@@ -1,4 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
+/* 设置全局字体 */
+body {
+    font-family: 'Open Sans', sans-serif;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* 设置标题字体 */
+.start-page-title {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 800; /* 800 表示加粗 */
+}
+
+/* 设置输入框字体 */
+.input-container input {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300; /* 300 表示较轻的字体 */
+}
+
+/* 设置按钮字体 */
+.start-button {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600; /* 可以根据需要调整 */
+}
+
+
+
+

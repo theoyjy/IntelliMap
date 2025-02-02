@@ -8,6 +8,10 @@
     background-color: #f5f5f5; /* 浅灰色背景 */
     text-align: center;
     padding: 0 16px; /* 响应式内边距 */
+    justify-content: flex-start; /* 内容顶部对齐 */
+    padding-top: 190px; /* 控制整体向上移动的距离 */
+    height: 100vh; /* 确保全屏高度 */
+    background-color: white;
   }
   
   /* Logo 样式 */
@@ -25,34 +29,85 @@
     margin-bottom: 24px;
   }
   
-  /* 输入框和按钮容器样式 */
-  .input-button-container {
+/* 输入框和按钮容器样式 */
+.input-button-container {
     display: flex;
-    align-items: center;
+    align-items: baseline; /* 垂直居中对齐 */
     justify-content: center;
     width: 100%;
-    max-width: 600px; /* 限制最大宽度 */
+    max-width: 800px; /* 限制最大宽度 */
     gap: 8px; /* 输入框和按钮之间的间距 */
-  }
-  
-  /* 输入框样式 */
-  .input-container {
-    flex: 1; /* 输入框占据剩余空间 */
-  }
+}
+
+/* 输入框样式 */
+.input-container input {
+    height: 30px; /* 与按钮高度保持一致 */
+    width: 100%; /* 宽度占据剩余空间 */
+    border-radius: 4px; /* 添加小圆角，保持美观 */
+    padding: 0 12px; /* 内边距，确保文本居中 */
+    font-size: 16px; /* 确保字体大小一致 */
+    box-sizing: border-box; /* 确保内边距和边框不会影响尺寸 */
+    border: 1px solid #ccc; /* 边框颜色 */
+}
+
   
   .input-container input {
     height: 50px; /* 方形设计 */
     border-radius: 0; /* 移除圆角 */
   }
+
+  .input-container {
+    flex: 1.5; /* 输入框占据更多比例 */
+}
   
-  /* 按钮样式 */
-  .start-button {
-    width: 120px; /* 固定按钮宽度 */
-    height: 50px; /* 方形设计 */
-    font-size: 16px;
+/* 按钮样式 */
+.start-button {
+    width: 50px; /* 固定按钮宽度 */
+    height: 55px; /* 与输入框高度一致 */
+    font-size: 16px; /* 确保文本大小一致 */
     font-weight: bold;
-    border-radius: 0; /* 移除圆角 */
+    border-radius: 4px; /* 添加小圆角，保持美观 */
     text-transform: none; /* 禁用全部大写 */
-    white-space: nowrap; /* 防止按钮内容换行 */
-  }
-  
+    white-space: nowrap; /* 防止按钮文字换行 */
+    box-sizing: border-box; /* 确保内边距和边框不会影响尺寸 */
+    padding: 0; /* 移除默认内边距 */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 确保按钮文字居中 */
+    line-height: normal; /* 移除按钮的默认行高 */
+    border: 1px solid #ccc; /* 边框颜色 */
+}
+
+.input-container[_ngcontent-ng-c2232970839] input[_ngcontent-ng-c2232970839] {
+    height: 20px;
+    border-radius: 0;
+}
+
+.mat-mdc-form-field-subscript-wrapper {
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden;
+}
+
+.start-button {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 500;
+    padding: 10px 20px;
+    background-color: #007bff; /* 初始背景色 */
+    color: white; /* 初始文字颜色 */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, transform 0.2s ease; /* 添加动画效果 */
+}
+
+.start-button:hover {
+    background-color: #007bff; /* 鼠标悬停时背景变黑 */
+    color: #fff; /* 文字变白 */
+}
+
+.start-button:active {
+    transform: scale(0.95); /* 点击时略微缩小 */
+    background-color: #333; /* 点击时背景更深 */
+}
