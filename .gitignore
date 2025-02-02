@@ -239,3 +239,6 @@ _Pvt_Extensions
 /IntelliMap.Server/obj
 IntelliMap.Server/obj/IntelliMap.Server.csproj.nuget.dgspec.json
 IntelliMap.Server/obj/IntelliMap.Server.csproj.nuget.dgspec.json
+/intellimap.client/.angular
+/intellimap.client/.angular/cache/19.1.5
+/intellimap.client/.angular/cache
