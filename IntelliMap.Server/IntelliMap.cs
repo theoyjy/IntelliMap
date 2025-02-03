@@ -23,7 +23,7 @@ namespace IntelliMap.Server
     public class MapUpdate
     {
         public required string UserId { get; set; }
-        public required string newDesc { get; set; }
+        public string newDesc { get; set; } = string.Empty;
         public required string[] actionsTaken { get; set; }
     };
 
@@ -59,6 +59,15 @@ namespace IntelliMap.Server
                 mapInformation.userId = userId;
                 _cache.Set(userId, mapInformation, TimeSpan.FromHours(1));
             }
+
+            using (_logger.BeginScope("MapInformation"))
+            {
+                _logger.LogInformation("Received MapUpdate request");
+                _logger.LogInformation("userId: {userId}", mapInformation.userId);
+                _logger.LogInformation("eventDesc: {questionDesc}", mapInformation.questionDesc);
+                _logger.LogInformation("Processing MapUpdate request");
+            }
+
             return mapInformation;
         }
 
@@ -75,7 +84,7 @@ namespace IntelliMap.Server
                         }
                         mapInformation.actionsTaken = actionTaken;
 
-                        if (question != null)
+                        if (question != null && question != string.Empty)
                         {
                             mapInformation.questionDesc += "User add more information for the initial question:" + question + "\r\n";
                         }
@@ -109,6 +118,13 @@ namespace IntelliMap.Server
 
             }
             _cache.Set(mapInformation.userId, mapInformation, TimeSpan.FromHours(1));
+            using (_logger.BeginScope("MapInformation"))
+            {
+                _logger.LogInformation("Received MapUpdate request");
+                _logger.LogInformation("userId: {userId}", mapInformation.userId);
+                _logger.LogInformation("eventDesc: {questionDesc}", mapInformation.questionDesc);
+                _logger.LogInformation("Processing MapUpdate request");
+            }
             return mapInformation;
         }
 
@@ -126,7 +142,7 @@ namespace IntelliMap.Server
                 "4. Assume that the user has taken the most optimal action and predict the 3 most likely outcomes.\r\n" +
                 "5. Provide a probability distribution for each predicted outcome (totaling 100%).\r\n" +
                 "6. Ensure that your response follows the JSON format. so I can easily parse it:\r\n" +
-                "A json object named 'data' contains two list and an attributes, one list named 'actions' contains the 3 most recommended actions, each one is a string, and the more recommened an action is, the lower index it is at." +
+                "A json object named 'data' contains two list and an attributes, one list named 'actions' contains the 3 strings for most recommended actions that have not been taken yet, and the more recommened an action is, the lower index it is at." +
                 "The other list named 'preRes' contains the 3 most likely predicted results(outcomes), the more likely an outcome is, the lower index it is at. " +
                 "Each predicted result is a object that has two attributes: \"des\" for description of the outcome (limited to 30 words) and \"prob\" for probability of the outcome which is a number between 0 to 100" +
                 "The last attribute in 'data' is 'mentalProfile' which is a string that describes the core mental features of user.\r\n";
@@ -143,7 +159,7 @@ namespace IntelliMap.Server
                 "4. Assume that the user has taken the most optimal action and predict the 3 most likely outcomes.\r\n" +
                 "5. Provide a probability distribution for each predicted outcome (totaling 100%).\r\n" +
                 "6. Ensure that your response follows the standardized JSON format below. No need to include ```json expression, so I can parse them:\r\n" +
-                "A object named \"data\" contains two list and an attributes, one list named \"actions\" contains the 3 most recommended actions, the more recommened an action is, the lower index it is at." +
+                "A object named \"data\" contains two list and an attributes, one list named \"actions\" contains the 3 strings for most recommended actions that have not been taken yet, the more recommened an action is, the lower index it is at." +
                 "The other list named \"preRes\" contains the 3 most likely predicted results(outcomes), the more likely an outcome is, the lower index it is at. " +
                 "Each predicted result is a object that has two attributes: \"des\" for description of the outcome (limited to 30 words) and \"prob\" for probability of the outcome which is a number between 0 to 100" +
                 "The last attribute in \"data\" is \"mentalProfile\" which is a string that describes the core mental features of user.\r\n";
