@@ -15,6 +15,21 @@ export interface Link {
   target: number;
 }
 
+interface PreRes {
+    des: string;
+    prob: number;
+  }
+  
+  interface UpdateMapResponse {
+    code: number;
+    data: {
+      actionList: string[];
+      preRes: PreRes[];
+    };
+    msg?: string;
+  }
+  
+
 @Component({
   selector: 'app-behavior-path',
   templateUrl: './behavior-path.component.html',
@@ -37,18 +52,16 @@ export class BehaviorPathComponent implements OnInit {
   ngOnInit(): void {
     this.createSvg();
 
-    // 读取本地存储的 AI 结果
     const storedResult = localStorage.getItem('aiResult');
     if (storedResult) {
       this.aiResult = JSON.parse(storedResult);
-      console.log("AI 结果解析成功:", this.aiResult);  // 调试输出
+      console.log('AI 结果解析成功:', this.aiResult);
       localStorage.removeItem('aiResult');
       this.processAiResult(this.aiResult);
     } else {
       console.error('AI 结果未找到，请确保问卷页面已正确存储数据！');
     }
 
-    // 监听窗口大小变化
     window.addEventListener('resize', () => this.adjustCanvasSize());
   }
 
@@ -63,11 +76,8 @@ export class BehaviorPathComponent implements OnInit {
   }
 
   private processAiResult(aiResult: any): void {
-    // 只取第一个默认行为和第一个可能的结果
-    const actionList = aiResult.actionList || ['默认行为'];
-    const preRes = aiResult.preRes && aiResult.preRes.length > 0
-      ? aiResult.preRes[0]
-      : { des: '未知结果', prob: 0 };
+    const actionList = aiResult.actionList || ['Default Action'];
+    const preRes = aiResult.preRes?.[0] || { des: 'Unknown Result', prob: 0 };
 
     this.nodes = [
       { id: 1, name: actionList[0], x: 100, y: this.height / 2 },
@@ -75,13 +85,12 @@ export class BehaviorPathComponent implements OnInit {
     ];
 
     this.links = [{ source: 1, target: 2 }];
-
     this.updateGraph();
   }
 
   private adjustCanvasSize(): void {
-    const maxNodeX = Math.max(...this.nodes.map(node => node.x));
-    const maxNodeY = Math.max(...this.nodes.map(node => node.y));
+    const maxNodeX = Math.max(...this.nodes.map((node) => node.x));
+    const maxNodeY = Math.max(...this.nodes.map((node) => node.y));
 
     const totalWidth = Math.max(maxNodeX + 200, window.innerWidth);
     const totalHeight = Math.max(maxNodeY + 200, window.innerHeight);
@@ -92,8 +101,7 @@ export class BehaviorPathComponent implements OnInit {
 
   private updateGraph(): void {
     this.svg.selectAll('*').remove();
-  
-    // 绘制连线
+
     this.svg
       .selectAll('line')
       .data(this.links)
@@ -105,116 +113,32 @@ export class BehaviorPathComponent implements OnInit {
       .attr('y2', (d: Link) => this.getNodeById(d.target).y)
       .attr('stroke', '#999')
       .attr('stroke-width', 2);
-  
-    // 绘制节点组
+
     const nodeGroup = this.svg
       .selectAll('g')
       .data(this.nodes)
       .enter()
       .append('g')
       .attr('transform', (d: Node) => `translate(${d.x}, ${d.y})`);
-  
-      nodeGroup
-      .append('rect') // 绘制矩形
-      .attr('width', (d: Node) => (d.id === this.nodes.length ? 200 : 100)) // 动态宽度
-      .attr('height', (d: Node) => this.calculateHeight(d.name, 200)) // 根据文字高度调整矩形高度
-      .attr('x', (d: Node) => -((d.id === this.nodes.length ? 200 : 100) / 2)) // 居中
-      .attr('y', (d: Node) => -this.calculateHeight(d.name, 200) / 2)
+
+    nodeGroup
+      .append('rect')
+      .attr('width', (d: Node) => this.calculateWidth(d.name))
+      .attr('height', (d: Node) => this.calculateHeight(d.name, this.calculateWidth(d.name)))
+      .attr('x', (d: Node) => -this.calculateWidth(d.name) / 2)
+      .attr('y', (d: Node) => -this.calculateHeight(d.name, this.calculateWidth(d.name)) / 2)
       .attr('fill', (d: Node) => (d.id === this.nodes.length ? '#f44336' : '#2196f3'))
-      .attr('stroke', '#fff')
+      .attr('stroke', '#ddd')
       .attr('stroke-width', 2);
-    
-      nodeGroup
+
+    nodeGroup
       .append('text')
       .attr('text-anchor', 'middle')
-      .attr('dy', '.35em')
-      .style('fill', '#fff')
-      .style('font-size', '12px')
-      .style('pointer-events', 'none')
-      .each(function (this: SVGTextElement, d: Node) { // 显式声明 this 的类型为 SVGTextElement
-        const textElement = d3.select<SVGTextElement, Node>(this); // 确保类型正确
-        const maxWidth = d.id === nodeGroup.size() ? 200 : 100; // 动态设置宽度
-        const words = d.name.split(' ');
-    
-        let line = '';
-        let lineNumber = 0;
-        const lineHeight = 16; // 每行文字高度
-        const y = 0;
-    
-        const tspan = textElement
-          .append('tspan')
-          .attr('x', 0)
-          .attr('y', y)
-          .attr('dy', `${lineHeight * lineNumber - (words.length / 2) * lineHeight}px`);
-    
-        words.forEach((word) => {
-          const testLine = `${line}${word} `;
-          tspan.text(testLine);
-          if (tspan.node()!.getComputedTextLength() > maxWidth) {
-            line = `${word} `;
-            lineNumber++;
-            textElement
-              .append('tspan')
-              .attr('x', 0)
-              .attr('y', y)
-              .attr('dy', `${lineHeight * lineNumber - (words.length / 2) * lineHeight}px`)
-              .text(word);
-          } else {
-            line = testLine;
-          }
-        });
-      });
-    
-  
-  
-    // 更新加号按钮
-    this.updatePlusButton();
-  }
-  
-  private calculateHeight(text: string, width: number): number {
-    const words = text.split(' ');
-    let lineCount = 1;
-    let line = '';
-  
-    words.forEach((word) => {
-      const testLine = `${line}${word} `;
-      if (testLine.length > width / 10) { // 假设每字符占 10px
-        lineCount++;
-        line = `${word} `;
-      } else {
-        line = testLine;
-      }
-    });
-  
-    return lineCount * 16; // 每行高度为 16px
-  }
-  
-
-  private updatePlusButton(): void {
-    const latestNode = this.nodes[this.nodes.length - 2]; // 获取最新行为节点
-    const resultNode = this.nodes[this.nodes.length - 1]; // 结果节点
-
-    if (!latestNode || !resultNode) return;
-
-    const plusX = (latestNode.x + resultNode.x) / 2;
-    const plusY = (latestNode.y + resultNode.y) / 2;
-
-    // 移除旧的加号
-    this.svg.selectAll('.add-button').remove();
-
-    // 添加新的加号
-    this.svg
-      .append('text')
-      .attr('class', 'add-button')
-      .attr('x', plusX)
-      .attr('y', plusY)
-      .attr('text-anchor', 'middle')
-      .attr('alignment-baseline', 'middle')
       .style('fill', 'black')
-      .style('font-size', '24px')
-      .style('cursor', 'pointer')
-      .text('+')
-      .on('click', () => this.onAddBehavior());
+      .style('font-size', '12px')
+      .text((d: Node) => d.name);
+
+    this.updatePlusButton();
   }
 
   private getNodeById(id: number): Node {
@@ -222,9 +146,38 @@ export class BehaviorPathComponent implements OnInit {
   }
 
   onAddBehavior(): void {
-    // 显示推荐行为列表
-    this.recommendedActions = this.aiResult.actionList || [];
-    this.showRecommendations = true;
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+      console.error('用户ID未找到，请检查 localStorage！');
+      return;
+    }
+
+    const actionsTaken = this.nodes
+      .filter((node) => node.id !== this.nodes[this.nodes.length - 1].id)
+      .map((node) => node.name);
+
+    this.apiService.postUpdateMap(userId, actionsTaken).subscribe({
+      next: (response: UpdateMapResponse) => {
+        if (response.code === 0) {
+          console.log('后端响应成功:', response);
+        // 更新推荐动作
+        this.recommendedActions = response.data.actionList;
+
+        // 更新结局节点
+        const resultNode = this.nodes[this.nodes.length - 1];
+        const preRes = response.data.preRes[0]; // 选择第一个结局
+        resultNode.name = `${preRes.des} (${preRes.prob}%)`;
+
+          this.updateGraph();
+          this.showRecommendations = true;
+        } else {
+          console.error('后端响应失败:', response.msg);
+        }
+      },
+      error: (err) => {
+        console.error('调用 updateMap API 出错:', err);
+      },
+    });
   }
 
   selectBehavior(action: string): void {
@@ -246,6 +199,58 @@ export class BehaviorPathComponent implements OnInit {
       { source: newNode.id, target: resultNode.id },
     ];
 
-    this.updateGraph();
+    this.showRecommendations = false;
+
+    this.onAddBehavior();
+  }
+
+  private updatePlusButton(): void {
+    if (this.nodes.length < 2) return;
+
+    const latestNode = this.nodes[this.nodes.length - 2];
+    const resultNode = this.nodes[this.nodes.length - 1];
+
+    if (!latestNode || !resultNode) return;
+
+    const plusX = (latestNode.x + resultNode.x) / 2;
+    const plusY = (latestNode.y + resultNode.y) / 2;
+
+    this.svg.selectAll('.add-button').remove();
+
+    this.svg
+      .append('text')
+      .attr('class', 'add-button')
+      .attr('x', plusX)
+      .attr('y', plusY)
+      .attr('text-anchor', 'middle')
+      .attr('alignment-baseline', 'middle')
+      .style('fill', 'black')
+      .style('font-size', '24px')
+      .style('cursor', 'pointer')
+      .text('+')
+      .on('click', () => this.onAddBehavior());
+  }
+
+  private calculateWidth(text: string): number {
+    const maxCharsPerLine = 20;
+    return Math.min(text.length * 10, maxCharsPerLine * 10);
+  }
+
+  private calculateHeight(text: string, width: number): number {
+    const words = text.split(' ');
+    let lineCount = 1;
+    let line = '';
+
+    words.forEach((word) => {
+      const testLine = `${line}${word} `;
+      if (testLine.length > width / 10) {
+        lineCount++;
+        line = `${word} `;
+      } else {
+        line = testLine;
+      }
+    });
+
+    return lineCount * 16;
   }
 }
