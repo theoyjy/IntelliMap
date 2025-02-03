@@ -42,8 +42,8 @@ interface UpdateMapResponse {
 
 export class BehaviorPathComponent implements OnInit {
   private svg: any;
-  private width = 1200;
-  private height = 800;
+  private width = 1209;
+  private height = 923;
   private nodes: Node[] = [];
   private links: Link[] = [];
   public recommendedActions: string[] = [];
@@ -157,7 +157,8 @@ export class BehaviorPathComponent implements OnInit {
   
   
   private updateGraph(): void {
-    this.svg.selectAll(':not(.background)').remove();
+    this.svg.selectAll('g').remove();
+    this.svg.selectAll('line').remove();
   
     this.svg
       .selectAll('line')
