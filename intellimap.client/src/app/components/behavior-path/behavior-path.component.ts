@@ -77,7 +77,7 @@ export class BehaviorPathComponent implements OnInit {
       .append('svg')
       .attr('width', this.width)
       .attr('height', this.height)
-      .style('background-color', '#f9f9f9')
+    //   .style('background-color', '#f9f9f9')
       .style('border', '1px solid #ddd');
   }
 
@@ -157,7 +157,7 @@ export class BehaviorPathComponent implements OnInit {
   
   
   private updateGraph(): void {
-    this.svg.selectAll('*').remove();
+    this.svg.selectAll(':not(.background)').remove();
   
     this.svg
       .selectAll('line')
