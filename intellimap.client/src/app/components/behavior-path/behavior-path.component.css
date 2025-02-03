@@ -1,137 +1,232 @@
-/* 画布容器样式 */
-#behaviorPathContainer {
-    position: absolute;
+/* 主容器，左右分栏 */
+.main-container {
+    display: flex;
+    height: 100vh; /* 页面高度 */
+    width: 100%; /* 占满整个宽度 */
+    overflow: hidden;
+  }
+  
+  /* 画布区域 */
+  .canvas-container {
+    flex: 4;
+    background-color: #f9f9f9;
+    background-image: linear-gradient(to right, #e0e0e0 1px, transparent 1px),
+                        linear-gradient(to bottom, #e0e0e0 1px, transparent 1px);
+    background-size: 20px 20px; /* 格子大小 */
+    border-right: 1px solid #ddd;
+    overflow: auto;
+  }
+  
+  /* 补充信息区域 */
+  .new-desc-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #f5f5f5;
+    border-left: 1px solid #ddd;
+  }
+  
+  /* 消息列表 */
+  .message-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  /* 消息通用样式 */
+  .message {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .message .text {
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 20px;
+    word-wrap: break-word;
+    max-width: 70%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* AI 消息样式 */
+  .ai-message {
+    align-self: flex-start; /* 左对齐 */
+  }
+  
+  .ai-message .text {
+    background-color: #e3f2fd; /* 浅蓝色背景 */
+    color: #1565c0; /* 深蓝色文字 */
+  }
+  
+  .ai-message .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* 圆形头像 */
+  }
+  
+  /* 用户消息样式 */
+  .user-message {
+    align-self: flex-end; /* 右对齐 */
+  }
+  
+  .user-message .text {
+    background-color: #bbdefb; /* 浅蓝色背景 */
+    color: #0d47a1; /* 深蓝色文字 */
+  }
+  
+  /* 底部输入框与按钮容器 */
+.message-input {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    border-top: 1px solid #ddd;
+    background-color: #ffffff;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    gap: 10px;
+    justify-content: flex-end; /* 将输入框和按钮向右对齐 */
+  }
+  
+  /* 输入框 */
+  .message-input textarea {
+    flex: 0 1 60%; /* 设置输入框最大宽度为 60% */
+    resize: none;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 14px;
+    line-height: 18px;
+    background-color: #f7f7f7;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  
+  .message-input textarea:focus {
+    border-color: #2196f3; /* 聚焦时的蓝色边框 */
+    box-shadow: 0 0 5px rgba(33, 150, 243, 0.5); /* 蓝色阴影 */
+  }
+  
+/* 修改发送按钮为圆角矩形 */
+.message-input button {
+    height: 50px;
+    padding: 8px 20px; /* 按钮内边距，调整宽高 */
+    border: none;
+    border-radius: 24px; /* 圆角矩形 */
+    background-color: #2196f3; /* 按钮主色调 */
+    color: #ffffff; /* 按钮文字或图标颜色 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    gap: 8px; /* 图标与文字之间的间距 */
+    transition: background-color 0.3s, transform 0.1s;
+    box-shadow: 0 4px 6px rgba(33, 150, 243, 0.2); /* 按钮阴影 */
+  }
+  
+  /* 按钮悬停效果 */
+  .message-input button:hover {
+    background-color: #1976d2; /* 悬停时颜色加深 */
+  }
+  
+  /* 按钮点击效果 */
+  .message-input button:active {
+    transform: scale(0.98); /* 点击时轻微缩小 */
+    box-shadow: 0 2px 4px rgba(33, 150, 243, 0.2); /* 点击时调整阴影 */
+  }
+  
+  /* 图标样式 */
+  .message-input i {
+    font-size: 18px; /* 图标大小 */
+  }
+  
+  /* 推荐行为拟态弹窗背景遮罩 */
+.recommendation-modal {
+    position: fixed; /* 固定在视口 */
     top: 0;
     left: 0;
-    width: 100vw; /* 占据整个窗口宽度 */
-    height: 100vh; /* 占据整个窗口高度 */
-    overflow: hidden; /* 防止滚动条 */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.3); /* 半透明背景 */
+    z-index: 1000; /* 显示在其他元素之上 */
   }
   
-  
-  /* 节点样式 */
-  circle {
-    cursor: pointer;
-    transition: all 0.3s ease; /* 平滑动画 */
-  }
-  
-  circle:hover {
-    stroke: #ff9800; /* 悬停时描边颜色 */
-    stroke-width: 4px; /* 悬停时描边宽度 */
-  }
-  
-  circle.add-button {
-    fill: #4caf50; /* 加号按钮绿色背景 */
-    stroke: #ffffff; /* 白色描边 */
-    stroke-width: 2px;
-  }
-  
-  circle.add-button:hover {
-    fill: #ff9800; /* 加号按钮悬停时变为橙色 */
-  }
-  
-  /* 节点文本样式 */
-  text {
-    font-family: 'Arial', sans-serif;
-    font-size: 14px;
-    fill: #ffffff; /* 默认白色文字 */
-    pointer-events: none; /* 禁止鼠标事件 */
-  }
-  
-  text.add-button {
-    font-weight: bold;
-    fill: #4caf50; /* 加号文本绿色 */
-    cursor: pointer; /* 鼠标指针样式 */
-    transition: transform 0.2s ease; /* 平滑动画 */
-  }
-  
-  text.add-button:hover {
-    transform: scale(1.2); /* 悬停时放大 */
-    fill: #388e3c; /* 深绿色 */
-  }
-  
-  /* 连线样式 */
-  line {
-    stroke: #cccccc; /* 默认连线灰色 */
-    stroke-width: 2px;
-  }
-  
-  line:hover {
-    stroke: #2196f3; /* 连线悬停时变蓝 */
-    stroke-width: 3px; /* 连线悬停时加宽 */
-  }
-  
-  /* 推荐行为弹窗 */
-  .recommendation-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    width: 300px;
-    z-index: 10;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 阴影效果 */
-  }
-  
-  .recommendation-container h3 {
-    margin: 0 0 10px;
-    font-size: 18px;
-    color: #333333;
+  /* 弹窗内容 */
+  .modal-content {
+    background-color: #f9f9f9;
+    border-radius: 16px;
+    padding: 24px;
+    width: 400px;
+    box-shadow: 
+      8px 8px 16px rgba(0, 0, 0, 0.2), 
+      -4px -4px 8px rgba(255, 255, 255, 0.6); /* 拟态阴影 */
     text-align: center;
   }
   
-  .recommendation-container ul {
+  /* 弹窗标题 */
+  .modal-content h3 {
+    margin-bottom: 16px;
+    font-size: 20px;
+    color: #333333;
+  }
+  
+  /* 推荐行为列表 */
+  .modal-content ul {
     list-style: none;
     padding: 0;
     margin: 0;
   }
   
-  .recommendation-container li {
-    padding: 10px;
-    margin: 5px 0;
-    background-color: #f5f7fa;
-    border-radius: 4px;
+  .modal-content li {
+    margin: 10px 0;
+    padding: 12px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 
+      inset 2px 2px 6px rgba(0, 0, 0, 0.1), 
+      inset -2px -2px 6px rgba(255, 255, 255, 0.7); /* 拟态内凹效果 */
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background-color 0.2s, box-shadow 0.2s;
   }
   
-  .recommendation-container li:hover {
-    background-color: #4caf50;
-    color: #ffffff;
+  .modal-content li:hover {
+    background-color: #e3f2fd;
+    box-shadow: 
+      inset 1px 1px 3px rgba(0, 0, 0, 0.1), 
+      inset -1px -1px 3px rgba(255, 255, 255, 0.7); /* 鼠标悬停拟态效果 */
   }
   
-  .recommendation-container button {
-    margin-top: 10px;
-    padding: 8px 16px;
-    background-color: #4caf50;
-    color: white;
+  /* 关闭按钮 */
+  .modal-content button {
+    margin-top: 16px;
+    padding: 10px 20px;
     border: none;
-    border-radius: 4px;
+    border-radius: 12px;
+    background-color: #2196f3;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
+    box-shadow: 
+      4px 4px 8px rgba(0, 0, 0, 0.2), 
+      -2px -2px 4px rgba(255, 255, 255, 0.6); /* 拟态按钮效果 */
+    transition: background-color 0.2s, transform 0.1s;
   }
   
-  .recommendation-container button:hover {
-    background-color: #388e3c;
+  .modal-content button:hover {
+    background-color: #1976d2;
   }
   
-  /* 动画效果 */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-  
-  .recommendation-container {
-    animation: fadeIn 0.3s ease-in-out; /* 弹窗淡入动画 */
+  .modal-content button:active {
+    transform: scale(0.98); /* 点击缩小效果 */
   }
   

@@ -1,11 +1,46 @@
-<div id="behaviorPathContainer"></div>
-<div *ngIf="showRecommendations" class="recommendation-container">
-    <h3>推荐行为</h3>
-    <ul>
-      <li *ngFor="let action of recommendedActions" (click)="selectBehavior(action)">
-        {{ action }}
-      </li>
-    </ul>
-    <button (click)="showRecommendations = false">取消</button>
+<div class="main-container">
+    <!-- 画布容器 -->
+    <div id="behaviorPathContainer" class="canvas-container"></div>
+  
+    <!-- 补充信息区域 -->
+    <div class="new-desc-container">
+      <!-- 消息列表 -->
+      <div class="message-list">
+        <!-- AI 提示消息 -->
+        <div class="message ai-message">
+          <img src="../../../assets/logo.png" alt="AI 头像" class="avatar" />
+          <div class="text">还有啥想说的细节？</div>
+        </div>
+  
+        <!-- 用户发送的消息 -->
+        <div
+          class="message user-message"
+          *ngFor="let msg of messages"
+        >
+          <div class="text">{{ msg }}</div>
+        </div>
+      </div>
+  
+      <!-- 输入框和发送按钮 -->
+      <div class="message-input">
+        <textarea
+          placeholder="请输入补充信息..."
+          [(ngModel)]="newDesc"
+        ></textarea>
+        <button (click)="submitNewDesc()"><i class="fas fa-paper-plane"></i>发送</button>
+      </div>
+    </div>
   </div>
   
+<!-- 推荐行为弹出层 -->
+<div *ngIf="showRecommendations" class="recommendation-modal">
+    <div class="modal-content">
+      <h3>推荐行为</h3>
+      <ul>
+        <li *ngFor="let action of recommendedActions" (click)="selectBehavior(action)">
+          {{ action }}
+        </li>
+      </ul>
+      <button (click)="showRecommendations = false">关闭</button>
+    </div>
+  </div>
