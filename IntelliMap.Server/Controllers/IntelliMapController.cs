@@ -10,13 +10,11 @@ namespace IntelliMap.Server.Controllers
     public class IntelliMapController : ControllerBase
     {
         private readonly ILogger<IntelliMapController> _logger;
-        private readonly IMemoryCache _cache;
         private AiService _aiService;
 
-        public IntelliMapController(ILogger<IntelliMapController> logger, IMemoryCache cache, AiService aiService)
+        public IntelliMapController(ILogger<IntelliMapController> logger, AiService aiService)
         {
             _logger = logger;
-            _cache = cache;
             _aiService = aiService;
         }
 
@@ -44,7 +42,6 @@ namespace IntelliMap.Server.Controllers
             }
             _logger.LogInformation("firstProfile request processed successfully");
 
-            _cache.Set(profile.UserId, profile, TimeSpan.FromMinutes(10));
             AskType ask = AskType.MentalAnswer;
             var aiResponse = await _aiService.AskAI(profile.UserId, profile.EventDesc, profile.Answer, ask);
             return Ok(aiResponse);
@@ -64,17 +61,16 @@ namespace IntelliMap.Server.Controllers
                 });
             }
 
-            using (_logger.BeginScope("firstProfile"))
+            using (_logger.BeginScope("MapUpdate"))
             {
-                _logger.LogInformation("Received firstProfile request");
+                _logger.LogInformation("Received MapUpdate request");
                 _logger.LogInformation("userId: {UserId}", mapUpdate.UserId);
                 _logger.LogInformation("eventDesc: {EventDesc}", mapUpdate.newDesc);
                 _logger.LogInformation("answer: {Answer}", mapUpdate.actionsTaken);
-                _logger.LogInformation("Processing firstProfile request");
+                _logger.LogInformation("Processing MapUpdate request");
             }
-            _logger.LogInformation("firstProfile request processed successfully");
+            _logger.LogInformation("MapUpdate request processed successfully");
 
-            _cache.Set(mapUpdate.UserId, mapUpdate, TimeSpan.FromMinutes(10));
             AskType ask = AskType.ActionTaken;
             var aiResponse = await _aiService.AskAI(mapUpdate.UserId, mapUpdate.newDesc, mapUpdate.actionsTaken, ask);
             if (aiResponse == null)
