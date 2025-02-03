@@ -105,28 +105,42 @@ export class BehaviorPathComponent implements OnInit {
     this.updateGraph();
   }
 
-  private calculateWidth(text: string): number {
-    const maxCharsPerLine = 20; // 每行最多显示字符数
-    return Math.min(text.length * 10, maxCharsPerLine * 10);
-  }
-  
-  private calculateHeight(text: string, width: number): number {
-    const words = text.split(' ');
-    let lineCount = 1;
-    let line = '';
-  
-    words.forEach((word) => {
-      const testLine = `${line}${word} `;
-      if (testLine.length > width / 10) {
-        lineCount++;
-        line = `${word} `;
-      } else {
-        line = testLine;
-      }
-    });
-  
-    return lineCount * 16; // 每行高度固定为 16px
-  }
+    private getTextMetrics(text: string, fontSize: number = 12) {
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d")!;
+        context.font = `${fontSize}px sans-serif`; // 确保与 SVG 中样式一致
+        return context.measureText(text);
+    }
+
+    private calculateWidth(text: string): number {
+        const maxWidth = 200; // 最大宽度 200px
+        const measuredWidth = this.getTextMetrics(text).width;
+        return Math.min(measuredWidth, maxWidth);
+    }
+
+    private calculateHeight(text: string, width: number): number {
+        const fontSize = 12; // 必须与 CSS 中设置的 font-size 一致
+        const lineHeight = 16; // 必须与 CSS 中 line-height 一致（例如 1.33 * 12px ≈ 16px）
+        const padding = 16; // 8px 上下 padding 总和
+
+        const words = text.split(' ');
+        let lineCount = 1;
+        let currentLineWidth = 0;
+
+        words.forEach((word) => {
+            // 测量单词宽度（包含空格）
+            const wordWidth = this.getTextMetrics(word + ' ').width;
+            // 换行判断
+            if (currentLineWidth + wordWidth > width) {
+                lineCount++;
+                currentLineWidth = wordWidth;
+            } else {
+                currentLineWidth += wordWidth;
+            }
+        });
+
+        return lineCount * lineHeight + padding; // 总高度 = 行数 * 行高 + 上下 padding
+    }
 
   private updatePlusButton(): void {
     if (this.nodes.length < 2) return;
@@ -172,29 +186,43 @@ export class BehaviorPathComponent implements OnInit {
       .attr('stroke', '#999')
       .attr('stroke-width', 2);
   
-    const nodeGroup = this.svg
-      .selectAll('g')
-      .data(this.nodes)
-      .enter()
-      .append('g')
-      .attr('transform', (d: Node) => `translate(${d.x}, ${d.y})`);
-  
-    nodeGroup
-      .append('rect')
-      .attr('width', (d: Node) => this.calculateWidth(d.name))
-      .attr('height', (d: Node) => this.calculateHeight(d.name, this.calculateWidth(d.name)))
-      .attr('x', (d: Node) => -this.calculateWidth(d.name) / 2)
-      .attr('y', (d: Node) => -this.calculateHeight(d.name, this.calculateWidth(d.name)) / 2)
-      .attr('fill', (d: Node) => (d.id === this.nodes.length ? '#f44336' : '#2196f3'))
-      .attr('stroke', '#ddd')
-      .attr('stroke-width', 2);
-  
-    nodeGroup
-      .append('text')
-      .attr('text-anchor', 'middle')
-      .style('fill', 'black')
-      .style('font-size', '12px')
-      .text((d: Node) => d.name);
+      const nodeGroup = this.svg
+          .selectAll('g')
+          .data(this.nodes)
+          .enter()
+          .append('g')
+          .attr('transform', (d: Node) => `translate(${d.x}, ${d.y})`);
+
+      nodeGroup
+          .append('rect')
+          .attr('width', (d: Node) => this.calculateWidth(d.name) + 16) // Add padding
+          .attr('height', (d: Node) => this.calculateHeight(d.name, this.calculateWidth(d.name)) + 16) // Add padding
+          .attr('x', (d: Node) => -(this.calculateWidth(d.name) + 16) / 2)
+          .attr('y', (d: Node) => -(this.calculateHeight(d.name, this.calculateWidth(d.name)) + 16) / 2)
+          .attr('fill', (d: Node) => (d.id === this.nodes.length ? '#f44336' : '#2196f3'))
+          .attr('stroke', '#ddd')
+          .attr('stroke-width', 2);
+
+      nodeGroup
+          .append('foreignObject')
+          .attr('x', (d: Node) => -(this.calculateWidth(d.name) + 16) / 2) // Align with rect
+          .attr('y', (d: Node) => -(this.calculateHeight(d.name, this.calculateWidth(d.name)) + 16) / 2)
+          .attr('width', (d: Node) => this.calculateWidth(d.name) + 16) // Include padding
+          .attr('height', (d: Node) => this.calculateHeight(d.name, this.calculateWidth(d.name)) + 16)
+          .attr('xmlns', 'http://www.w3.org/1999/xhtml')
+          .append('xhtml:div')
+          .style('width', (d: Node) => this.calculateWidth(d.name))
+          .style('height', (d: Node) => this.calculateHeight(d.name, this.calculateWidth(d.name)))
+          .style('display', 'flex')
+          .style('justify-content', 'flex-start') // Correct flex value
+          .style('align-items', 'stretch')
+          .style('padding', '8px')
+          .style('font-size', '12px')
+          .style('font-family', "'Open Sans', sans-serif")
+          .style('color', 'white')
+          .style('text-align', 'left')
+          .style('word-wrap', 'break-word')
+          .html((d: Node) => d.name);
   
     this.updatePlusButton();
   }
