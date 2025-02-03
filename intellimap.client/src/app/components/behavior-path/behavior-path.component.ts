@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import * as d3 from 'd3';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api.service';
@@ -35,6 +35,7 @@ interface UpdateMapResponse {
   selector: 'app-behavior-path',
   templateUrl: './behavior-path.component.html',
   styleUrls: ['./behavior-path.component.css'],
+  encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [CommonModule, FormsModule],
 })
@@ -105,28 +106,28 @@ export class BehaviorPathComponent implements OnInit {
     this.updateGraph();
   }
 
-  private calculateWidth(text: string): number {
+private calculateWidth(text: string): number {
     const maxCharsPerLine = 20; // 每行最多显示字符数
-    return Math.min(text.length * 10, maxCharsPerLine * 10);
-  }
-  
-  private calculateHeight(text: string, width: number): number {
+    return Math.min(text.length * 8, maxCharsPerLine * 8);
+}
+
+private calculateHeight(text: string, width: number): number {
     const words = text.split(' ');
     let lineCount = 1;
     let line = '';
-  
+
     words.forEach((word) => {
-      const testLine = `${line}${word} `;
-      if (testLine.length > width / 10) {
-        lineCount++;
-        line = `${word} `;
-      } else {
-        line = testLine;
-      }
+        const testLine = `${line}${word} `;
+        if (testLine.length > width / 8) {
+            lineCount++;
+            line = `${word} `;
+        } else {
+            line = testLine;
+        }
     });
-  
-    return lineCount * 16; // 每行高度固定为 16px
-  }
+
+    return lineCount * 20; // 每行高度固定为 20px
+}
 
   private updatePlusButton(): void {
     if (this.nodes.length < 2) return;
@@ -142,17 +143,35 @@ export class BehaviorPathComponent implements OnInit {
     this.svg.selectAll('.add-button').remove(); // 清理旧按钮
   
     this.svg
+      .append('circle')
+      .attr('class', 'add-button')
+      .attr('cx', plusX)
+      .attr('cy', plusY)
+      .attr('r', 20) // 圆的半径
+      .style('fill', 'red')
+      .style('cursor', 'pointer')
+      .on('click', () => this.onAddBehavior()); // 点击触发行为添加逻辑
+
+    this.svg
       .append('text')
       .attr('class', 'add-button')
       .attr('x', plusX)
       .attr('y', plusY)
       .attr('text-anchor', 'middle')
       .attr('alignment-baseline', 'middle')
-      .style('fill', 'black')
+      .style('fill', 'white')
       .style('font-size', '24px')
       .style('cursor', 'pointer')
       .text('+')
-      .on('click', () => this.onAddBehavior()); // 点击触发行为添加逻辑
+      .on('click', () => this.onAddBehavior()) // 点击触发行为添加逻辑
+      .on('mouseover', function(this: SVGTextElement) {
+        d3.select(this).style('fill', 'yellow').style('font-size', '30px');
+        d3.select(this.parentNode as Element).select('circle').attr('r', 25); // 放大圆
+      })
+      .on('mouseout', function(this: SVGTextElement) {
+        d3.select(this).style('fill', 'white').style('font-size', '24px');
+        d3.select(this.parentNode as Element).select('circle').attr('r', 20); // 恢复圆大小
+      });
   }
   
   
@@ -180,22 +199,21 @@ export class BehaviorPathComponent implements OnInit {
       .attr('transform', (d: Node) => `translate(${d.x}, ${d.y})`);
   
     nodeGroup
-      .append('rect')
-      .attr('width', (d: Node) => this.calculateWidth(d.name))
-      .attr('height', (d: Node) => this.calculateHeight(d.name, this.calculateWidth(d.name)))
-      .attr('x', (d: Node) => -this.calculateWidth(d.name) / 2)
-      .attr('y', (d: Node) => -this.calculateHeight(d.name, this.calculateWidth(d.name)) / 2)
-      .attr('fill', (d: Node) => (d.id === this.nodes.length ? '#f44336' : '#2196f3'))
-      .attr('stroke', '#ddd')
-      .attr('stroke-width', 2);
+    .append('rect')
+    .attr('class', (d: Node) => d.id === this.nodes.length ? 'node-rect node-last' : 'node-rect node-default')
+    .attr('width', (d: Node) => this.calculateWidth(d.name))
+    .attr('height', (d: Node) => this.calculateHeight(d.name, this.calculateWidth(d.name)))
+    .attr('x', (d: Node) => -this.calculateWidth(d.name) / 2)
+    .attr('y', (d: Node) => -this.calculateHeight(d.name, this.calculateWidth(d.name)) / 2)
+    .attr('stroke-width', 2);
+  
   
     nodeGroup
       .append('text')
       .attr('text-anchor', 'middle')
-      .style('fill', 'black')
+      .style('fill', 'white')
       .style('font-size', '12px')
-      .text((d: Node) => d.name);
-  
+      .text((d: Node) => d.name);  
     this.updatePlusButton();
   }
   
