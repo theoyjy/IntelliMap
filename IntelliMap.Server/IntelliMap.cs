@@ -84,10 +84,22 @@ namespace IntelliMap.Server
 
                 case AskType.MentalAnswer:
                     {
+                        string[] questions = [
+                            "When making important decisions, what do you prioritize?",
+                            "How do you prefer to interact with others?",
+                            "How do you handle a brand-new problem?",
+                            "How do you typically react in high-pressure situations?", 
+                            "When facing an uncertain future, you are more likely to?", 
+                            "How do you prefer to work?", 
+                            "If you are in a team, what role do you naturally take?", 
+                            "When your opinion differs from most people, you tend to?", 
+                            "What is your attitude toward risk?", 
+                            "How do you approach problem-solving?",
+                          ];
                         string mentalAnswer = "User has taken the following actions:";
                         for (int i = 0; i < list.Length; i++)
                         {
-                            mentalAnswer += list[i] + "\r\n";
+                            mentalAnswer += questions[i] + "User answer: " + list[i] + "\r\n";
                         }
                         mapInformation.mentalAnswer = mentalAnswer;
 
@@ -110,7 +122,7 @@ namespace IntelliMap.Server
                 question = "You are an intelligent decision-making assistant. Your task is to:\r\n" +
                 "1. Analyze the user's profile based on the provided responses to 10 questions.\r\n" +
                 "2. Understand and analyze the user's current problem, using user's description and user profile.\r\n" +
-                "3. Generate 3 recommended actions that the user can take to address the issue, each action should be limited to 3 words.\r\n" +
+                "3. Generate 3 recommended actions that the user can take to address the issue with the consideration of user's profile, each action should be limited to 3 words.\r\n" +
                 "4. Assume that the user has taken the most optimal action and predict the 3 most likely outcomes.\r\n" +
                 "5. Provide a probability distribution for each predicted outcome (totaling 100%).\r\n" +
                 "6. Ensure that your response follows the JSON format. so I can easily parse it:\r\n" +
@@ -127,7 +139,7 @@ namespace IntelliMap.Server
                 question = "You are an intelligent decision-making assistant. Your task is to:\r\n" +
                 "1. Update the user's mental profile based on the profile passed to you and the questions the user asked and actions has taken\r\n" +
                 "2. Understand and analyze the user's current problem, using the user's description and user profile.\r\n" +
-                "3. Generate 3 recommended actions that the user can take to address the issue, each action should be limited to 3 words.\r\n" +
+                "3. Generate 3 recommended actions that the user can take to address the issue with the consideration of user's profile, each action should be limited to 3 words.\r\n" +
                 "4. Assume that the user has taken the most optimal action and predict the 3 most likely outcomes.\r\n" +
                 "5. Provide a probability distribution for each predicted outcome (totaling 100%).\r\n" +
                 "6. Ensure that your response follows the standardized JSON format below. No need to include ```json expression, so I can parse them:\r\n" +
@@ -169,6 +181,11 @@ namespace IntelliMap.Server
         public async Task<ApiResponse> AskAI(string userId, string question, string[] list, AskType askType)
         {
             var mapInformation = GetMapInformation(userId);
+            if(askType == AskType.ActionTaken && mapInformation.questionDesc == null)
+            {
+                // cache expired
+                return null;
+            }
 
             mapInformation = UpdateMapInformationFromUser(mapInformation, question, list, askType);  
 
