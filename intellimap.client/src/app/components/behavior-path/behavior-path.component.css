@@ -1,6 +1,3 @@
-
-
-
 /* 主容器，左右分栏 */
 .main-container {
     display: flex;
@@ -233,3 +230,48 @@
     transform: scale(0.98); /* 点击缩小效果 */
   }
   
+
+/* 所有矩形的默认样式 */
+.node-rect {
+    fill: url(#defaultGradient); /* 默认渐变填充 */
+    stroke: rgba(0, 0, 255, 0.6); /* 柔和的浅灰色边框 */
+    stroke-width: 2px;
+    rx: 10px; /* 圆角 */
+    ry: 10px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+
+/* 所有矩形的默认样式 */
+.node-rect {
+    fill: #1565C0; /* 深蓝色填充 */
+    stroke: #ddd; /* 边框颜色 */
+    rx: 15px;
+    ry: 15px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* 最后一个节点的特殊样式 */
+  .node-last {
+    fill: #0D47A1; /* 特殊深蓝色填充 */
+    stroke: #aaa; /* 边框颜色 */
+    rx: 15px;
+    ry: 15px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* 普通节点样式 */
+  .node-default {
+    fill: #1976D2; /* 默认深蓝色 */
+    stroke: #ddd; /* 边框颜色 */
+    rx: 15px;
+    ry: 15px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  /* 鼠标悬停效果 */
+  .node-rect:hover, .node-last:hover, .node-default:hover {
+    fill: #1E88E5; /* 悬停时深蓝色填充 */
+    stroke: #333; /* 悬停时边框颜色 */
+    transform: scale(1.05); /* 悬停时放大效果 */
+  }

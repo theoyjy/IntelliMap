@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import * as d3 from 'd3';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api.service';
@@ -35,6 +35,7 @@ interface UpdateMapResponse {
   selector: 'app-behavior-path',
   templateUrl: './behavior-path.component.html',
   styleUrls: ['./behavior-path.component.css'],
+  encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [CommonModule, FormsModule],
 })
@@ -156,17 +157,35 @@ export class BehaviorPathComponent implements OnInit {
     this.svg.selectAll('.add-button').remove(); // 清理旧按钮
   
     this.svg
+      .append('circle')
+      .attr('class', 'add-button')
+      .attr('cx', plusX)
+      .attr('cy', plusY)
+      .attr('r', 20) // 圆的半径
+      .style('fill', 'red')
+      .style('cursor', 'pointer')
+      .on('click', () => this.onAddBehavior()); // 点击触发行为添加逻辑
+
+    this.svg
       .append('text')
       .attr('class', 'add-button')
       .attr('x', plusX)
       .attr('y', plusY)
       .attr('text-anchor', 'middle')
       .attr('alignment-baseline', 'middle')
-      .style('fill', 'black')
+      .style('fill', 'white')
       .style('font-size', '24px')
       .style('cursor', 'pointer')
       .text('+')
-      .on('click', () => this.onAddBehavior()); // 点击触发行为添加逻辑
+      .on('click', () => this.onAddBehavior()) // 点击触发行为添加逻辑
+      .on('mouseover', function(this: SVGTextElement) {
+        d3.select(this).style('fill', 'yellow').style('font-size', '30px');
+        d3.select(this.parentNode as Element).select('circle').attr('r', 25); // 放大圆
+      })
+      .on('mouseout', function(this: SVGTextElement) {
+        d3.select(this).style('fill', 'white').style('font-size', '24px');
+        d3.select(this.parentNode as Element).select('circle').attr('r', 20); // 恢复圆大小
+      });
   }
   
   
