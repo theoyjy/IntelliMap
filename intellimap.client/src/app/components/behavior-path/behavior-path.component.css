@@ -15,6 +15,7 @@
     background-size: 20px 20px;
     position: relative; /* 作为右侧输入框的定位参考 */
     overflow: hidden; /* 防止滑动区域超出 */
+    z-index: 1;
 }
 
 /* 浮动输入框容器 */
@@ -248,6 +249,11 @@
 }
 
 /* 节点样式 */
+.node {
+    position: absolute;
+    z-index: 10; /* 确保节点高于背景 */
+  }
+  
 .node-rect {
     fill: #1976D2;
     stroke: #ddd;
