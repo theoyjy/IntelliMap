@@ -52,6 +52,17 @@ export class BehaviorPathComponent implements OnInit {
   public newDesc = ''; // 统一使用 newDesc 表示补充信息
   public aiResult: any;
   public messages: string[] = []; // 消息列表
+  showInputBox = false; // 默认隐藏输入框
+
+   // 切换输入框显示状态
+   toggleInputBox() {
+    this.showInputBox = !this.showInputBox;
+  }
+
+  // 点击空白处自动收起
+  hideInputBox() {
+    this.showInputBox = false;
+  }
 
   constructor(private apiService: ApiService) {}
 
@@ -321,6 +332,7 @@ export class BehaviorPathComponent implements OnInit {
     if (this.newDesc.trim()) {
       const userId = localStorage.getItem('userId');
       this.messages.push(this.newDesc);
+      this.showInputBox = false; // 发送后隐藏输入框
       if (!userId) {
         console.error('用户ID未找到！');
         return;

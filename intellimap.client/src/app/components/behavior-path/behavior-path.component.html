@@ -1,46 +1,30 @@
 <div class="main-container">
     <!-- 画布容器 -->
-    <div id="behaviorPathContainer" class="canvas-container"></div>
-  
-    <!-- 补充信息区域 -->
-    <div class="new-desc-container">
-      <!-- 消息列表 -->
-      <div class="message-list">
-        <!-- AI 提示消息 -->
-        <div class="message ai-message">
-          <img src="../../../assets/logo.png" alt="AI 头像" class="avatar" />
-          <div class="text">还有啥想说的细节？</div>
+    <div class="canvas-container">
+      <!-- 右侧浮动输入栏 -->
+      <div class="new-desc-container" [class.show]="showInputBox">
+        <!-- 消息列表 -->
+        <div class="message-list">
+          <div class="message ai-message">
+            <img src="../../../assets/logo.png" alt="AI 头像" class="avatar" />
+            <div class="text">还有啥想说的细节？</div>
+          </div>
+          <div class="message user-message" *ngFor="let msg of messages">
+            <div class="text">{{ msg }}</div>
+          </div>
         </div>
-  
-        <!-- 用户发送的消息 -->
-        <div
-          class="message user-message"
-          *ngFor="let msg of messages"
-        >
-          <div class="text">{{ msg }}</div>
+        <!-- 输入框 -->
+        <div class="message-input">
+          <textarea
+            placeholder="请输入补充信息..."
+            [(ngModel)]="newDesc"
+          ></textarea>
+          <button (click)="submitNewDesc()">发送</button>
         </div>
       </div>
-  
-      <!-- 输入框和发送按钮 -->
-      <div class="message-input">
-        <textarea
-          placeholder="请输入补充信息..."
-          [(ngModel)]="newDesc"
-        ></textarea>
-        <button (click)="submitNewDesc()"><i class="fas fa-paper-plane"></i>发送</button>
-      </div>
     </div>
+  
+    <!-- 添加细节按钮 -->
+    <button class="toggle-input-btn" (click)="toggleInputBox()">添加细节</button>
   </div>
   
-<!-- 推荐行为弹出层 -->
-<div *ngIf="showRecommendations" class="recommendation-modal">
-    <div class="modal-content">
-      <h3>推荐行为</h3>
-      <ul>
-        <li *ngFor="let action of recommendedActions" (click)="selectBehavior(action)">
-          {{ action }}
-        </li>
-      </ul>
-      <button (click)="showRecommendations = false">关闭</button>
-    </div>
-  </div>
