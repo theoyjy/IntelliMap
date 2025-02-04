@@ -165,19 +165,20 @@ export class BehaviorPathComponent implements OnInit {
 
     this.svg.selectAll('.add-button').remove(); // 清理旧按钮
 
-    this.svg
-      .append('circle')
-      .attr('class', 'add-button')
-      .attr('cx', plusX)
-      .attr('cy', plusY)
-      .attr('r', 20) // 圆的半径
-      .style('fill', 'red')
-      .style('cursor', 'pointer')
-      .on('click', () => this.onAddBehavior());
+  // 添加圆形
+  this.svg
+    .append('circle')
+    .attr('class', 'add-button add-button-circle')
+    .attr('cx', plusX)
+    .attr('cy', plusY)
+    .attr('r', 20)
+    .style('fill', 'red')
+    .style('cursor', 'pointer')
+    .on('click', () => this.onAddBehavior());
 
     this.svg
       .append('text')
-      .attr('class', 'add-button')
+      .attr('class', 'add-button add-button-text')
       .attr('x', plusX)
       .attr('y', plusY)
       .attr('text-anchor', 'middle')
@@ -200,6 +201,24 @@ export class BehaviorPathComponent implements OnInit {
           .attr('r', 20); // 恢复圆大小
       });
   }
+
+  private updatePlusButtonPosition(): void {
+    if (this.nodes.length < 2) return;
+  
+    const latestNode = this.nodes[this.nodes.length - 2];
+    const resultNode = this.nodes[this.nodes.length - 1];
+    const plusX = (latestNode.x + resultNode.x) / 2;
+    const plusY = (latestNode.y + resultNode.y) / 2;
+  
+    // 更新圆形和文字的位置
+    this.svg.select('.add-button-circle')
+      .attr('cx', plusX)
+      .attr('cy', plusY);
+    this.svg.select('.add-button-text')
+      .attr('x', plusX)
+      .attr('y', plusY);
+  }
+  
 
   /**
    * 更新图形：重新绘制连线和节点，并为节点添加拖拽和删除功能
@@ -253,6 +272,14 @@ export class BehaviorPathComponent implements OnInit {
               .attr('y1', (l: Link) => self.getNodeById(l.source).y)
               .attr('x2', (l: Link) => self.getNodeById(l.target).x)
               .attr('y2', (l: Link) => self.getNodeById(l.target).y);
+
+              // 如果拖拽的节点是最后两个中的一个，更新加号位置
+      const draggedNodeId = d.id;
+      const lastNode = self.nodes[self.nodes.length - 1];
+      const secondLastNode = self.nodes[self.nodes.length - 2];
+      if (draggedNodeId === lastNode.id || draggedNodeId === secondLastNode.id) {
+        self.updatePlusButtonPosition();
+      }
           })
           .on('end', function (event, d) {
             // 拖拽结束时移除 dragging 类
