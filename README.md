@@ -1,4 +1,4 @@
-**IntelliMap** is an AI assitant that will help you decide how to improve the current situation by:
+**IntelliMap** is an AI assitant that will help you to sort out what actions should be taken to approach the target outcome from current issue/situation:
   1. Build a basic understanding of your personality with a small questionnaire
   2. Providing recommended actions based on your personality and question description
   3. Predicting possible outcomes based on all your selected actions, question description and any additional details provided.
