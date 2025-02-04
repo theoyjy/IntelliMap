@@ -8,7 +8,7 @@
       <div class="message-list">
         <div class="message ai-message">
           <img src="../../../assets/logo.png" alt="AI 头像" class="avatar" />
-          <div class="text">还有啥想说的细节？</div>
+          <div class="text">Provide any additional details that come to mind here:</div>
         </div>
         <div class="message user-message" *ngFor="let msg of messages">
           <div class="text">{{ msg }}</div>
@@ -17,22 +17,22 @@
       <!-- 输入框 -->
       <div class="message-input">
         <textarea placeholder="请输入补充信息..." [(ngModel)]="newDesc"></textarea>
-        <button (click)="submitNewDesc()">发送</button>
+        <button (click)="submitNewDesc()">Submit</button>
       </div>
     </div>
     
     <!-- 添加细节按钮 -->
-    <button class="toggle-input-btn" (click)="toggleInputBox()">添加细节</button>
+    <button class="toggle-input-btn" (click)="toggleInputBox()">Add more info</button>
   </div>
   
   <div class="recommendations-modal" *ngIf="showRecommendations">
     <div class="modal-content">
-        <h3>请选择推荐行为</h3>
+        <h3>Please select a recommended action</h3>
         <ul>
             <li *ngFor="let action of recommendedActions" (click)="selectBehavior(action)">
                 {{ action }}
             </li>
         </ul>
-        <button (click)="showRecommendations = false">关闭</button>
+        <button (click)="showRecommendations = false">close</button>
     </div>
 </div>

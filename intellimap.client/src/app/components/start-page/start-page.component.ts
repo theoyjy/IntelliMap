@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { v4 as uuidv4 } from 'uuid'; // 导入 UUID 生成器
 import { FormsModule } from '@angular/forms'; // 支持 [(ngModel)]
 import { MatFormFieldModule } from '@angular/material/form-field'; // 支持 <mat-form-field>
 import { MatInputModule } from '@angular/material/input'; // 支持 <input matInput>
@@ -24,20 +23,7 @@ export class StartPageComponent {
 
   constructor(private router: Router) {}
 
-  ngOnInit(): void {
-    this.userId = this.generateUserId(); // 在页面加载时生成用户 ID
-    console.log('生成的用户 ID:', this.userId);
-  }
 
-  // 生成用户 ID
-  private generateUserId(): string {
-    let storedUserId = localStorage.getItem('userId');
-    if (!storedUserId) {
-      storedUserId = uuidv4(); // 生成新的 UUID
-      localStorage.setItem('userId', storedUserId); // 存储到 localStorage
-    }
-    return storedUserId;
-  }
 
   // 跳转到问卷页面
   navigateToQuestionnaire() {

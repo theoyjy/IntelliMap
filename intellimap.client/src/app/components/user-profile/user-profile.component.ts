@@ -68,6 +68,8 @@ export class UserProfileComponent implements OnInit {
 
   // Submit answers to the backend
   submitAnswers(): void {
+    this.userId = crypto.randomUUID();
+    localStorage.setItem("userId", this.userId);
     this.isSubmitting = true; // Show loading spinner
     const requestBody = {
       userId: this.userId,
@@ -77,6 +79,7 @@ export class UserProfileComponent implements OnInit {
 
     this.apiService.postData('api/firstProfile', requestBody).subscribe(
       (response: any) => {
+
         this.aiAnalysisResult = response;
         localStorage.setItem('aiResult', JSON.stringify(response.data));
         this.router.navigate(['/behavior-path'],{queryParams: { userId: this.userId, eventDesc: this.eventDesc }

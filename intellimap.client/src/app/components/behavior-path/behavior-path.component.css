@@ -28,7 +28,7 @@
       linear-gradient(to bottom, #e0e0e0 1px, transparent 1px);
     background-size: 20px 20px;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     z-index: 1;
 }
 
@@ -36,15 +36,18 @@
   /* 画布区域 */
   .canvas-container {
     flex: 1;
-    height: 100%; /* 确保与父容器高度一致 */
+    height: 100%;
+    min-height: 0;
     background-color: var(--background-light);
     background-image: linear-gradient(to right, #e0e0e0 1px, transparent 1px),
       linear-gradient(to bottom, #e0e0e0 1px, transparent 1px);
     background-size: 20px 20px;
     position: relative;
-    overflow: hidden;
+    /* 关键：可让溢出可见 */
+    overflow: visible; 
     z-index: 1;
   }
+  
 
   #behaviorPathContainer {
     width: 100%; /* 确保宽度填满画布 */
@@ -190,7 +193,7 @@
   bottom: 20px; /* 距离底部 20px */
   left: 50%; /* 从左边 50% */
   transform: translateX(-50%); /* 使按钮居中对齐 */
-  z-index: 1000; /* 确保在其他元素上层 */
+  z-index: 2000; /* 确保在其他元素上层 */
   padding: 10px 20px; /* 按钮的内边距 */
   border: none; /* 去除边框 */
   border-radius: 20px; /* 圆角按钮 */
@@ -341,6 +344,7 @@
   .node-group {
     cursor: pointer;
     transition: none;
+    border-radius: 50%;
   }
   
   .node-group:hover .node-rect {
@@ -357,6 +361,7 @@
   .node-rect {
     fill: var(--primary-color);
     stroke: var(--border-color);
+    border-radius: 10px;
     transition: transform 0.3s var(--transition-ease), fill 0.3s var(--transition-ease);
   }
   
@@ -369,4 +374,21 @@
     fill: var(--primary-color);
     stroke: var(--border-color);
   }
+  
+  .link {
+    stroke: #000; /* 确保颜色深，增强对比 */
+    stroke-width: 2px; /* 增加线条宽度 */
+    fill: none; /* 避免填充错误 */
+  }
+  .link.hidden-to-result {
+    stroke: #ff0000; /* 使用红色区分隐藏到结局的连线 */
+    stroke-dasharray: 4, 4; /* 设置虚线样式 */
+  }
+  
+  .link:hover {
+    stroke: #1976D2; /* 鼠标悬停时颜色变化 */
+    stroke-width: 3px;
+  }
+  
+
   
