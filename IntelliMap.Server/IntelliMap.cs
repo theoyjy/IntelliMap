@@ -41,7 +41,7 @@ namespace IntelliMap.Server
     {
         private readonly HttpClient _httpClient;
         private readonly IMemoryCache _cache;
-        private readonly string _apiKey = "AIzaSyD6Fy8Xg4WwFIjTej_Yuk--QOTHpMJgGFk";
+        private string _apiKey;
         private readonly ILogger<AiService> _logger;
 
         public AiService(HttpClient httpClient, IMemoryCache cache, ILogger<AiService> logger)
@@ -49,6 +49,7 @@ namespace IntelliMap.Server
             _httpClient = httpClient;
             _cache = cache;
             _logger = logger;
+            _apiKey = System.IO.File.ReadAllText("api.txt");
         }
 
         private MapInformation GetMapInformation(string userId)
