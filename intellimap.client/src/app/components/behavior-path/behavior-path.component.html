@@ -16,14 +16,23 @@
       </div>
       <!-- 输入框 -->
       <div class="message-input">
-        <textarea
-          placeholder="请输入补充信息..."
-          [(ngModel)]="newDesc"
-        ></textarea>
+        <textarea placeholder="请输入补充信息..." [(ngModel)]="newDesc"></textarea>
         <button (click)="submitNewDesc()">发送</button>
       </div>
     </div>
+    
+    <!-- 添加细节按钮 -->
+    <button class="toggle-input-btn" (click)="toggleInputBox()">添加细节</button>
   </div>
-  <!-- 添加细节按钮 -->
-  <button class="toggle-input-btn" (click)="toggleInputBox()">添加细节</button>
   
+  <div class="recommendations-modal" *ngIf="showRecommendations">
+    <div class="modal-content">
+        <h3>请选择推荐行为</h3>
+        <ul>
+            <li *ngFor="let action of recommendedActions" (click)="selectBehavior(action)">
+                {{ action }}
+            </li>
+        </ul>
+        <button (click)="showRecommendations = false">关闭</button>
+    </div>
+</div>

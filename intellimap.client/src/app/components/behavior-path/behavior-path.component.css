@@ -13,8 +13,8 @@
     background-image: linear-gradient(to right, #e0e0e0 1px, transparent 1px),
         linear-gradient(to bottom, #e0e0e0 1px, transparent 1px);
     background-size: 20px 20px;
-    position: relative; /* 作为右侧输入框的定位参考 */
-    overflow: hidden; /* 防止滑动区域超出 */
+    position: relative; /* 为右侧输入框提供定位参考 */
+    overflow: hidden; /* 防止内容超出 */
     z-index: 1;
 }
 
@@ -34,7 +34,7 @@
 }
 
 .new-desc-container.show {
-    right: 0; /* 滑动显示 */
+    right: 0; /* 显示时滑入 */
 }
 
 /* 消息列表 */
@@ -61,13 +61,11 @@
     border-radius: 12px;
     font-size: 14px;
     line-height: 20px;
-    max-width: 70%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     word-wrap: break-word !important; /* 允许长单词断行 */
-    white-space: pre-wrap !important; /* 保留换行符，同时允许内容自动换行 */
-    max-width: calc(100% - 40px); /* 确保最大宽度不超过容器宽度，留出边距 */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    overflow-wrap: break-word !important; /* 确保长单词能够断行 */
+    white-space: pre-wrap !important; /* 保留换行符，同时自动换行 */
+    max-width: calc(100% - 40px); /* 保证不超过容器宽度，留出边距 */
+    overflow-wrap: break-word !important;
 }
 
 /* AI 消息样式 */
@@ -89,18 +87,17 @@
 /* 用户消息样式 */
 .user-message {
     align-self: flex-end; /* 右对齐 */
-    justify-content: flex-end; /* 内容靠右 */
-    word-wrap: break-word !important; /* 允许长单词断行 */
-    white-space: pre-wrap !important; /* 保留换行符，同时允许内容自动换行 */
-    max-width: calc(100% - 40px); /* 确保最大宽度不超过容器宽度，留出边距 */
-    overflow-wrap: break-word !important; /* 确保长单词能够断行 */
+    justify-content: flex-end;
+    word-wrap: break-word !important;
+    white-space: pre-wrap !important;
+    max-width: calc(100% - 40px);
+    overflow-wrap: break-word !important;
 }
 
 .user-message .text {
     background-color: #bbdefb;
     color: #0d47a1;
-    text-align: right; /* 文本右对齐 */
-    
+    text-align: right;
 }
 
 /* 输入框区域 */
@@ -178,8 +175,8 @@
     transform: scale(0.98);
 }
 
-/* 推荐行为弹窗背景 */
-.recommendation-modal {
+/* 模态框背景 */
+.recommendations-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -188,72 +185,111 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.3);
-    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.5); /* 优雅的半透明背景 */
+    z-index: 3000;
+    animation: fadeIn 0.3s ease-in-out; /* 弹窗淡入效果 */
 }
 
 /* 弹窗内容 */
-.modal-content {
-    background-color: #f9f9f9;
+.recommendations-modal .modal-content {
+    background: linear-gradient(145deg, #ffffff, #f0f0f0); /* 柔和渐变背景 */
     border-radius: 16px;
     padding: 24px;
     width: 400px;
-    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.2), -4px -4px 8px rgba(255, 255, 255, 0.6);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* 立体感阴影 */
     text-align: center;
+    animation: scaleIn 0.3s ease-in-out; /* 缩放进入动画 */
 }
 
-.modal-content h3 {
+/* 标题样式 */
+.recommendations-modal .modal-content h3 {
     margin-bottom: 16px;
-    font-size: 20px;
-    color: #333333;
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* 轻微的文字阴影 */
 }
 
-.modal-content ul {
+/* 列表样式 */
+.recommendations-modal ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.modal-content li {
+.recommendations-modal li {
     margin: 10px 0;
     padding: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #555;
     background-color: #ffffff;
     border-radius: 12px;
     cursor: pointer;
-    transition: background-color 0.2s, box-shadow 0.2s;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 柔和阴影 */
 }
 
-.modal-content li:hover {
-    background-color: #e3f2fd;
+.recommendations-modal li:hover {
+    background-color: #e3f2fd; /* 交互颜色 */
+    color: #1565c0;
+    transform: translateY(-2px); /* 鼠标悬停时略微提升 */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* 更深的阴影 */
 }
 
-/* 弹窗关闭按钮 */
-.modal-content button {
-    margin-top: 16px;
+/* 关闭按钮 */
+.recommendations-modal .modal-content button {
+    margin-top: 20px;
     padding: 10px 20px;
-    border: none;
-    border-radius: 12px;
-    background-color: #2196f3;
-    color: #ffffff;
     font-size: 16px;
     font-weight: bold;
+    color: #ffffff;
+    background-color: #2196f3;
+    border: none;
+    border-radius: 20px;
     cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* 按钮阴影 */
+    transition: all 0.3s ease;
 }
 
-.modal-content button:hover {
+.recommendations-modal .modal-content button:hover {
     background-color: #1976d2;
+    transform: scale(1.05); /* 悬停时放大效果 */
 }
 
-.modal-content button:active {
-    transform: scale(0.98);
+.recommendations-modal .modal-content button:active {
+    transform: scale(0.95); /* 点击时缩小效果 */
 }
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
 
 /* 节点样式 */
 .node {
     position: absolute;
-    z-index: 10; /* 确保节点高于背景 */
-  }
-  
+    z-index: 10; /* 确保节点显示在背景之上 */
+}
+
 .node-rect {
     fill: #1976D2;
     stroke: #ddd;
