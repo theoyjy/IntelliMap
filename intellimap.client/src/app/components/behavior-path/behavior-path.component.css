@@ -1,44 +1,80 @@
-/* 主容器布局 */
-.main-container {
-    display: flex;
-    height: 100vh;
-    width: 100%;
-    overflow: hidden;
-}
+/* 定义全局变量 */
+:root {
+    --primary-color: #1976D2;
+    --primary-hover: #1E88E5;
+    --primary-dark: #0D47A1;
+    --border-color: #ddd;
+    --background-light: #f9f9f9;
+    --background-light-alt: #f5f5f5;
+    --modal-bg: rgba(0, 0, 0, 0.5);
+    --transition-duration: 0.3s;
+    --transition-ease: ease-in-out;
+  }
+  
+  html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden; /* 防止出现滚动条 */
+  }
+  
 
-/* 画布区域 */
-.canvas-container {
-    flex: 1; /* 占据剩余空间 */
-    background-color: #f9f9f9;
+  /* 主容器布局 */
+  .canvas-container {
+    flex: 1;
+    height: 100%; /* 强制占满父容器高度 */
+    min-height: 0; /* 避免子元素撑开父容器 */
+    background-color: var(--background-light);
     background-image: linear-gradient(to right, #e0e0e0 1px, transparent 1px),
-        linear-gradient(to bottom, #e0e0e0 1px, transparent 1px);
+      linear-gradient(to bottom, #e0e0e0 1px, transparent 1px);
     background-size: 20px 20px;
-    position: relative; /* 为右侧输入框提供定位参考 */
-    overflow: hidden; /* 防止内容超出 */
+    position: relative;
+    overflow: hidden;
     z-index: 1;
 }
 
-/* 浮动输入框容器 */
-.new-desc-container {
+
+  /* 画布区域 */
+  .canvas-container {
+    flex: 1;
+    height: 100%; /* 确保与父容器高度一致 */
+    background-color: var(--background-light);
+    background-image: linear-gradient(to right, #e0e0e0 1px, transparent 1px),
+      linear-gradient(to bottom, #e0e0e0 1px, transparent 1px);
+    background-size: 20px 20px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  #behaviorPathContainer {
+    width: 100%; /* 确保宽度填满画布 */
+    height: 100%; /* 确保高度填满画布 */
+    position: relative; /* 以便 SVG 正常定位 */
+  }
+  
+  
+  /* 浮动输入框容器 */
+  .new-desc-container {
     position: absolute;
     top: 0;
-    right: -400px; /* 初始隐藏在画布右侧外 */
-    width: 400px;
+    right: -100%;
+    width: 100%;
+    max-width: 400px;
     height: 100%;
-    background-color: #f5f5f5;
-    border-left: 1px solid #ddd;
+    background-color: var(--background-light-alt);
+    border-left: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
-    transition: right 0.3s ease-in-out; /* 滑动动画 */
-    z-index: 1000; /* 显示在画布上方 */
-}
-
-.new-desc-container.show {
-    right: 0; /* 显示时滑入 */
-}
-
-/* 消息列表 */
-.message-list {
+    transition: right var(--transition-duration) var(--transition-ease);
+    z-index: 1000;
+  }
+  
+  .new-desc-container.show {
+    right: 0;
+  }
+  
+  /* 消息列表 */
+  .message-list {
     flex: 1;
     overflow-y: auto;
     padding: 16px;
@@ -46,90 +82,89 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-    overflow-x: hidden; /* 禁止水平滚动 */
-}
-
-/* 通用消息样式 */
-.message {
+    overflow-x: hidden;
+  }
+  
+  /* 通用消息样式 */
+  .message {
     display: flex;
     align-items: flex-start;
     gap: 10px;
-}
-
-.message .text {
+  }
+  
+  .message .text {
     padding: 10px 14px;
     border-radius: 12px;
     font-size: 14px;
     line-height: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    word-wrap: break-word !important; /* 允许长单词断行 */
-    white-space: pre-wrap !important; /* 保留换行符，同时自动换行 */
-    max-width: calc(100% - 40px); /* 保证不超过容器宽度，留出边距 */
-    overflow-wrap: break-word !important;
-}
-
-/* AI 消息样式 */
-.ai-message {
-    align-self: flex-start; /* 左对齐 */
-}
-
-.ai-message .text {
+    word-break: break-word;
+    white-space: pre-wrap;
+    max-width: calc(100% - 40px);
+    overflow-wrap: break-word;
+  }
+  
+  /* AI 消息样式 */
+  .ai-message {
+    align-self: flex-start;
+  }
+  
+  .ai-message .text {
     background-color: #e3f2fd;
     color: #1565c0;
-}
-
-.ai-message .avatar {
+  }
+  
+  .ai-message .avatar {
     width: 40px;
     height: 40px;
-    border-radius: 50%; /* 圆形头像 */
-}
-
-/* 用户消息样式 */
-.user-message {
-    align-self: flex-end; /* 右对齐 */
+    border-radius: 50%;
+  }
+  
+  /* 用户消息样式 */
+  .user-message {
+    align-self: flex-end;
     justify-content: flex-end;
-    word-wrap: break-word !important;
-    white-space: pre-wrap !important;
+    word-break: break-word;
+    white-space: pre-wrap;
     max-width: calc(100% - 40px);
-    overflow-wrap: break-word !important;
-}
-
-.user-message .text {
+    overflow-wrap: break-word;
+  }
+  
+  .user-message .text {
     background-color: #bbdefb;
     color: #0d47a1;
     text-align: right;
-}
-
-/* 输入框区域 */
-.message-input {
+  }
+  
+  /* 输入框区域 */
+  .message-input {
     display: flex;
     align-items: center;
     padding: 10px 16px;
-    border-top: 1px solid #ddd;
+    border-top: 1px solid var(--border-color);
     background-color: #ffffff;
     gap: 10px;
-}
-
-/* 输入框样式 */
-.message-input textarea {
+  }
+  
+  .message-input textarea {
     flex: 1;
     resize: none;
     padding: 12px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 20px;
     background-color: #f7f7f7;
     outline: none;
     font-size: 14px;
     line-height: 18px;
-}
-
-.message-input textarea:focus {
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  
+  .message-input textarea:focus {
     border-color: #2196f3;
     box-shadow: 0 0 5px rgba(33, 150, 243, 0.5);
-}
-
-/* 发送按钮样式 */
-.message-input button {
+  }
+  
+  .message-input button {
     padding: 10px 20px;
     border: none;
     border-radius: 20px;
@@ -139,44 +174,66 @@
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.1s;
-}
-
-.message-input button:hover {
+  }
+  
+  .message-input button:hover {
     background-color: #1976d2;
-}
-
-.message-input button:active {
+  }
+  
+  .message-input button:active {
     transform: scale(0.98);
-}
-
-/* 添加细节按钮 */
-.toggle-input-btn {
+  }
+  
+  /* 添加细节按钮 */
+  .toggle-input-btn {
+    position: fixed; /* 固定在视窗内 */
+  bottom: 20px; /* 距离底部 20px */
+  left: 50%; /* 从左边 50% */
+  transform: translateX(-50%); /* 使按钮居中对齐 */
+  z-index: 1000; /* 确保在其他元素上层 */
+  padding: 10px 20px; /* 按钮的内边距 */
+  border: none; /* 去除边框 */
+  border-radius: 20px; /* 圆角按钮 */
+  background-color: #2196f3; /* 按钮背景颜色 */
+  color: #ffffff; /* 按钮文字颜色 */
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.1s;
+  }
+  
+  .toggle-input-btn:hover {
+    background-color: #1976d2;
+  }
+  
+  .toggle-input-btn:active {
+    transform: scale(0.98);
+  }
+  
+  /* 默认行为的加号按钮（独立出来，与添加细节按钮并列显示在底部左侧） */
+  .default-plus-button {
     position: fixed;
     bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 20px;
     z-index: 1000;
     padding: 10px 20px;
     border: none;
     border-radius: 20px;
-    background-color: #2196f3;
+    background-color: var(--primary-color);
     color: #ffffff;
     font-size: 14px;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.1s;
-}
-
-.toggle-input-btn:hover {
-    background-color: #1976d2;
-}
-
-.toggle-input-btn:active {
-    transform: scale(0.98);
-}
-
-/* 模态框背景 */
-.recommendations-modal {
+  }
+  
+  .default-plus-button:hover {
+    background-color: var(--primary-hover);
+    transform: scale(1.05);
+  }
+  
+  /* 模态框背景 */
+  .recommendations-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -185,39 +242,40 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.5); /* 优雅的半透明背景 */
+    background-color: var(--modal-bg);
     z-index: 3000;
-    animation: fadeIn 0.3s ease-in-out; /* 弹窗淡入效果 */
-}
-
-/* 弹窗内容 */
-.recommendations-modal .modal-content {
-    background: linear-gradient(145deg, #ffffff, #f0f0f0); /* 柔和渐变背景 */
+    animation: fadeIn 0.3s var(--transition-ease);
+  }
+  
+  /* 弹窗内容 */
+  .recommendations-modal .modal-content {
+    background: linear-gradient(145deg, #ffffff, #f0f0f0);
     border-radius: 16px;
     padding: 24px;
-    width: 400px;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* 立体感阴影 */
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
     text-align: center;
-    animation: scaleIn 0.3s ease-in-out; /* 缩放进入动画 */
-}
-
-/* 标题样式 */
-.recommendations-modal .modal-content h3 {
+    animation: scaleIn 0.3s var(--transition-ease);
+  }
+  
+  /* 标题样式 */
+  .recommendations-modal .modal-content h3 {
     margin-bottom: 16px;
     font-size: 22px;
     font-weight: bold;
     color: #333;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* 轻微的文字阴影 */
-}
-
-/* 列表样式 */
-.recommendations-modal ul {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* 列表样式 */
+  .recommendations-modal ul {
     list-style: none;
     padding: 0;
     margin: 0;
-}
-
-.recommendations-modal li {
+  }
+  
+  .recommendations-modal li {
     margin: 10px 0;
     padding: 12px;
     font-size: 16px;
@@ -226,19 +284,19 @@
     background-color: #ffffff;
     border-radius: 12px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 柔和阴影 */
-}
-
-.recommendations-modal li:hover {
-    background-color: #e3f2fd; /* 交互颜色 */
+    transition: all 0.3s var(--transition-ease);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .recommendations-modal li:hover {
+    background-color: #e3f2fd;
     color: #1565c0;
-    transform: translateY(-2px); /* 鼠标悬停时略微提升 */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* 更深的阴影 */
-}
-
-/* 关闭按钮 */
-.recommendations-modal .modal-content button {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* 关闭按钮 */
+  .recommendations-modal .modal-content button {
     margin-top: 20px;
     padding: 10px 20px;
     font-size: 16px;
@@ -248,68 +306,67 @@
     border: none;
     border-radius: 20px;
     cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* 按钮阴影 */
-    transition: all 0.3s ease;
-}
-
-.recommendations-modal .modal-content button:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s var(--transition-ease);
+  }
+  
+  .recommendations-modal .modal-content button:hover {
     background-color: #1976d2;
-    transform: scale(1.05); /* 悬停时放大效果 */
-}
-
-.recommendations-modal .modal-content button:active {
-    transform: scale(0.95); /* 点击时缩小效果 */
-}
-
-/* 动画效果 */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes scaleIn {
-    from {
-        transform: scale(0.9);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-
-
-/* 节点样式 */
-.node {
-    position: absolute;
-    z-index: 10; /* 确保节点显示在背景之上 */
-}
-
-.node-rect {
-    fill: #1976D2;
-    stroke: #ddd;
-    rx: 15px;
-    ry: 15px;
-    transition: all 0.3s ease-in-out;
-}
-
-.node-rect:hover {
-    fill: #1E88E5;
-    stroke: #333;
     transform: scale(1.05);
-}
-
-.node-last {
-    fill: #0D47A1;
+  }
+  
+  .recommendations-modal .modal-content button:active {
+    transform: scale(0.95);
+  }
+  
+  /* 动画效果 */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes scaleIn {
+    from {
+      transform: scale(0.9);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  /* SVG 节点样式 */
+  /* 为使节点整体（矩形和文字）响应鼠标悬停效果，我们建议将节点组加上一个共同的类名（例如 .node-group） */
+  .node-group {
+    cursor: pointer;
+    transition: none;
+  }
+  
+  .node-group:hover .node-rect {
+    transform: scale(1.05);
+    fill: var(--primary-hover);
+  }
+  
+  /* 针对节点内文字的效果，例如改变颜色或添加其他效果 */
+  .node-group:hover foreignObject div {
+    color: #fff;  /* 此处示例：悬停时文字变白 */
+  }
+  
+  /* 注意：SVG 矩形的 rx/ry 建议在创建时直接设置属性 */
+  .node-rect {
+    fill: var(--primary-color);
+    stroke: var(--border-color);
+    transition: transform 0.3s var(--transition-ease), fill 0.3s var(--transition-ease);
+  }
+  
+  .node-last {
+    fill: var(--primary-dark);
     stroke: #aaa;
-}
-
-.node-default {
-    fill: #1976D2;
-    stroke: #ddd;
-}
+  }
+  
+  .node-default {
+    fill: var(--primary-color);
+    stroke: var(--border-color);
+  }
+  
